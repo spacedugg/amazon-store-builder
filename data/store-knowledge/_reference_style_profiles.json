@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "reviewDate": "2026-11-21",
-  "scope": "Macro-style observations from all 24 active reference homepage captures; separate current navigation inventory. This is not a new full visual subpage or mobile audit.",
+  "scope": "Macro-style observations from 24 active desktop homepage captures and 54 representative desktop subpages. One additional selected subpage remained unavailable after two capture attempts. The separate navigation inventory is discovery only, not a complete visual subpage audit. Mobile, video playback and interactions were not reviewed.",
   "transferPolicy": "New brand CI, own assortment and approved scope govern. Observations describe sources; principles and applications are editorial adaptations. Do not copy source colours, fonts, icons, images, claims, ASINs or product counts. No unseen subpage structure or interaction is inferred.",
   "stores": [
     {
@@ -38,12 +38,66 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 12,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
-        "historicalSubpageAnalysis": null
-      }
+        "historicalSubpageAnalysis": null,
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Herren",
+          "sourceUrl": "https://www.amazon.de/stores/page/69163286-E2B0-49BF-8FBF-2EDF8D4C539E",
+          "pageRole": "category_hub",
+          "capturedAt": "2026-11-21T18:13:19.795Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/snocks-2fb511336f49abd9.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/snocks-2fb511336f49abd9-review.png",
+            "width": 1440,
+            "height": 2023,
+            "imagesComplete": true,
+            "sourceHtmlHash": "c87356c97893dfd21449b5b9e56f8d88f65942763897a90a3c944a11e43fa3fe"
+          },
+          "observations": [
+            "A large underwear lifestyle image is followed by a two-image category pair for socks and apparel.",
+            "Copy is limited to large category names; the page does not repeat the longer Home sequence."
+          ],
+          "transferablePrinciples": [
+            "Use a short image-first category hub when its role is routing, not product comparison."
+          ],
+          "differenceFromHome": "Much shorter category router; same restrained photographic system."
+        },
+        {
+          "pageName": "Damen Shapewear",
+          "sourceUrl": "https://www.amazon.de/stores/page/9095E656-EB29-48F1-B242-3499E3409B44",
+          "pageRole": "category_selection",
+          "capturedAt": "2026-11-21T18:13:23.990Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/snocks-622ac37f616f8c93.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/snocks-622ac37f616f8c93-review.png",
+            "width": 1440,
+            "height": 4161,
+            "imagesComplete": true,
+            "sourceHtmlHash": "794febbafeb159afb7807b0d655bc1769bf5c33408160377a2d2564fde095b73"
+          },
+          "observations": [
+            "A wide lifestyle lead is followed by repeated asymmetric groups pairing one labelled garment image with two detail/model photos.",
+            "Large photography and very short labels carry the selection; no long explanatory text blocks are visible."
+          ],
+          "transferablePrinciples": [
+            "Use consistent visual grouping for closely related product types, with detail photos doing the explanatory work."
+          ],
+          "differenceFromHome": "Deeper product-family presentation rather than broad category routing."
+        }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "esn",
@@ -79,7 +133,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 22,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -88,8 +142,62 @@
           "analyzedAt": "2026-05-23",
           "pageCount": 10,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "PROTEINE",
+          "sourceUrl": "https://www.amazon.de/stores/page/05C54A75-8964-41E5-9C10-19EB32583205",
+          "pageRole": "category_selection",
+          "capturedAt": "2026-11-21T18:13:35.712Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/esn-862fd9574db20059.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/esn-862fd9574db20059-review.png",
+            "width": 1440,
+            "height": 3103,
+            "imagesComplete": true,
+            "sourceHtmlHash": "e1398e8b996cb06fe45b9be327049bbf5edae9537b919719df04ef559ac68608"
+          },
+          "observations": [
+            "A large product/video poster leads into dark paired product-family feature tiles with small benefit icons.",
+            "A split selector teaser and a full-width all-products banner close the page."
+          ],
+          "transferablePrinciples": [
+            "Group product-family benefits below a strong category lead; keep comparison copy subordinate to products."
+          ],
+          "differenceFromHome": "Retains the dark graphic system but focuses the category families and selection aid."
+        },
+        {
+          "pageName": "ÜBER ESN",
+          "sourceUrl": "https://www.amazon.de/stores/page/44C5F932-97AA-4A1B-A7F1-207D5450AF8F",
+          "pageRole": "brand_story",
+          "capturedAt": "2026-11-21T18:13:44.067Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/esn-57767bdb5046a2bb.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/esn-57767bdb5046a2bb-review.png",
+            "width": 1440,
+            "height": 4795,
+            "imagesComplete": true,
+            "sourceHtmlHash": "ac4d5120c060470508537fb8f9ddf4ddc4925e8212aa95b7006e142253171764"
+          },
+          "observations": [
+            "After an athlete/video poster, the page switches to light backgrounds with mission text, production/site photos and compact evidence columns.",
+            "Alternating text/photo panels introduce a facility and the team; the close returns to a dark product banner."
+          ],
+          "transferablePrinciples": [
+            "Let an editorial/story page carry more explanation and evidence than a shopping hub while maintaining recognizable brand anchors."
+          ],
+          "differenceFromHome": "The body is substantially lighter and more text-rich than the dark shopping Home; do not generalize its Home palette/density to every page."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "ag1",
@@ -125,12 +233,88 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 4,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
-        "historicalSubpageAnalysis": null
-      }
+        "historicalSubpageAnalysis": null,
+        "visuallyReviewedSubpageCount": 3,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Zutaten",
+          "sourceUrl": "https://www.amazon.de/stores/page/69FAC810-7BAD-410C-9DA2-A4BC3901C96C",
+          "pageRole": "ingredient_detail",
+          "capturedAt": "2026-11-21T18:14:00.811Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/ag1-820ec646fe861cbd.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/ag1-820ec646fe861cbd-review.png",
+            "width": 1440,
+            "height": 8574,
+            "imagesComplete": true,
+            "sourceHtmlHash": "e3561afc4aabdd7f4aa5b6652ea22eb2bc82f18d08720d1b708b154d708af1cf"
+          },
+          "observations": [
+            "A large ingredient/video lead introduces compact ingredient categories and a long labelled ingredient-image matrix.",
+            "A textual ingredient list, suitability panel and detailed nutrition/label graphic add substantially more fine information than Home."
+          ],
+          "transferablePrinciples": [
+            "Use detailed visual matrices and reference information only on a page whose task is ingredient education, with verified data."
+          ],
+          "differenceFromHome": "More information-dense reference content, not a shopping-hub sequence."
+        },
+        {
+          "pageName": "Was ist AG1?",
+          "sourceUrl": "https://www.amazon.de/stores/page/4E61320F-5759-49E9-B9AF-77F7861679F3",
+          "pageRole": "product_explanation",
+          "capturedAt": "2026-11-21T18:14:00.901Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/ag1-8299d10cd26d01d6.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/ag1-8299d10cd26d01d6-review.png",
+            "width": 1440,
+            "height": 3937,
+            "imagesComplete": true,
+            "sourceHtmlHash": "68ba7b3e10a64b8946797bf2cc2c6f89d580febe9aa18c6c442e7c08d2ff1a0a"
+          },
+          "observations": [
+            "A close product-use lead is followed by a product/benefit split, a dark exclusion panel, a portion-information block and a comparison table."
+          ],
+          "transferablePrinciples": [
+            "Structure explanation as what it is, what it offers, what it is not and how it compares, only when supported by the new brand's evidence."
+          ],
+          "differenceFromHome": "An explanatory decision-support page rather than category discovery."
+        },
+        {
+          "pageName": "Qualitätsstandards",
+          "sourceUrl": "https://www.amazon.de/stores/page/06350DED-921B-4418-A693-AA63BB9D443C",
+          "pageRole": "quality_evidence",
+          "capturedAt": "2026-11-21T18:14:22.824Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/ag1-75a43829039a4e84.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/ag1-75a43829039a4e84-review.png",
+            "width": 1440,
+            "height": 6804,
+            "imagesComplete": true,
+            "sourceHtmlHash": "2a98359df53f7832238c8c0275d539fcb0392c1859372c5b3e1f59ff06d9c429"
+          },
+          "observations": [
+            "A lifestyle/statement lead is followed by repeated light text/photo evidence pairs covering standards, production and testing."
+          ],
+          "transferablePrinciples": [
+            "Group each quality topic with its own concrete evidence image and readable explanation instead of stacking generic seals."
+          ],
+          "differenceFromHome": "More extensive evidence-led text while maintaining spacious photographic blocks."
+        }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "nespresso",
@@ -166,7 +350,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 42,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -175,8 +359,85 @@
           "analyzedAt": "2026-05-23",
           "pageCount": 10,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 3,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Original Maschinen",
+          "sourceUrl": "https://www.amazon.de/stores/page/FCA8433A-D425-45C9-A777-FDFB8BF4A978",
+          "pageRole": "machine_selection",
+          "capturedAt": "2026-11-21T18:14:26.835Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/nespresso-e57c6acf573da31f.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/nespresso-e57c6acf573da31f-review.png",
+            "width": 1440,
+            "height": 10368,
+            "imagesComplete": true,
+            "sourceHtmlHash": "f91a4c6e6fdc800e9d1194a74f38cd7ab03cf5f4a27de4b559a18555471ac026"
+          },
+          "observations": [
+            "Repeated paired blocks place a large styled machine image beside a short explanatory panel and native product card.",
+            "Neutral surfaces and small typography support systematic machine comparison; an Original coffee route closes the page."
+          ],
+          "transferablePrinciples": [
+            "Pair visual product identity with focused differentiating copy and a native purchase module when comparison is the page task."
+          ],
+          "differenceFromHome": "Longer and more systematic than the homepage; repeated comparison units suit the machine range."
+        },
+        {
+          "pageName": "Creatista Pro",
+          "sourceUrl": "https://www.amazon.de/stores/page/6ADAE8B6-5BB2-4921-A765-C15FAD9D6F90",
+          "pageRole": "product_line",
+          "capturedAt": "2026-11-21T18:14:38.759Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/nespresso-10eee10e19325d75.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/nespresso-10eee10e19325d75-review.png",
+            "width": 1440,
+            "height": 3156,
+            "imagesComplete": true,
+            "sourceHtmlHash": "cbf4069290546f4ad8537e584dd2d763d770ddf59cb0d01b861d3ac287f603ad"
+          },
+          "observations": [
+            "Native product rows lead the page on white, followed by one large Creatista Pro editorial image and a coffee cross-link."
+          ],
+          "transferablePrinciples": [
+            "A product-line page can prioritise buyable variants before a single editorial reinforcement."
+          ],
+          "differenceFromHome": "Much more native-commerce-led and shorter than the broad image-led homepage."
+        },
+        {
+          "pageName": "Original Kaffee",
+          "sourceUrl": "https://www.amazon.de/stores/page/D99A9525-EC3E-4165-ACF4-7F5E44D788A5",
+          "pageRole": "coffee_family_selection",
+          "capturedAt": "2026-11-21T18:14:46.533Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/nespresso-7a9bbfd9bbf56b16.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/nespresso-7a9bbfd9bbf56b16-review.png",
+            "width": 1440,
+            "height": 5178,
+            "imagesComplete": true,
+            "sourceHtmlHash": "5be45599f8896a9a2640c5c316647598463d5dc890dc767726b737041ee99fca"
+          },
+          "observations": [
+            "Cup-size guide leads into repeated coffee-family editorial/product pairs.",
+            "Styled coffee scenes and compact copy sit beside native product modules; a machine cross-link closes the range."
+          ],
+          "transferablePrinciples": [
+            "Use a relevant selection aid before comparable families, with a complementary category route where useful."
+          ],
+          "differenceFromHome": "More instructional and systematic than broad homepage discovery."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "kaercher",
@@ -212,7 +473,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 50,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -221,8 +482,86 @@
           "analyzedAt": "2026-05-23",
           "pageCount": 10,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 3,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "36 V Akku-Plattform",
+          "sourceUrl": "https://www.amazon.de/stores/page/06406C10-993B-4DF0-A0CB-899AF6527E26",
+          "pageRole": "compatibility_platform",
+          "capturedAt": "2026-11-21T18:15:05.860Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/kaercher-46ab14de452501ff.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/kaercher-46ab14de452501ff-review.png",
+            "width": 1440,
+            "height": 5148,
+            "imagesComplete": true,
+            "sourceHtmlHash": "8c2128313b34639b81aa5853aa80abd1e34ee92378c4d033395dc7677dc033da"
+          },
+          "observations": [
+            "Platform explanation and battery imagery precede starter-kit, charger and technology panels.",
+            "Yellow dividers segment technical information, then a native tool grid and related platform links."
+          ],
+          "transferablePrinciples": [
+            "Explain compatibility before offering components; keep technical evidence separate from the commerce grid."
+          ],
+          "differenceFromHome": "Focused system education and compatibility replace homepage deal variety."
+        },
+        {
+          "pageName": "Hochdruckreiniger",
+          "sourceUrl": "https://www.amazon.de/stores/page/97B62778-1E8C-41DA-9A60-C519CC8EA850",
+          "pageRole": "range_selection",
+          "capturedAt": "2026-11-21T18:15:05.912Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/kaercher-eac1f71e6d1231fd.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/kaercher-eac1f71e6d1231fd-review.png",
+            "width": 1440,
+            "height": 6208,
+            "imagesComplete": true,
+            "sourceHtmlHash": "48e61ee1b827b238c12c54926328d9bec6d638b72216cbaa3470f4ea002c5e08"
+          },
+          "observations": [
+            "A large lifestyle lead and brand statement introduce the range; a comparison graphic separates Classic, Standard and Comfort.",
+            "Alternating explanation/lifestyle pairs route to each range, with yellow section bars and related-category tiles."
+          ],
+          "transferablePrinciples": [
+            "A genuine range comparison can lead to dedicated selection routes; use alternating image/text only where it explains meaningful differences."
+          ],
+          "differenceFromHome": "More ordered decision support and fewer competing deal sections than the homepage."
+        },
+        {
+          "pageName": "Support",
+          "sourceUrl": "https://www.amazon.de/stores/page/AB307551-BA34-4906-ADBB-7A79AED902DA",
+          "pageRole": "support_campaign",
+          "capturedAt": "2026-11-21T18:15:25.057Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/kaercher-6357949bb11e7e44.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/kaercher-6357949bb11e7e44-review.png",
+            "width": 1440,
+            "height": 4417,
+            "imagesComplete": true,
+            "sourceHtmlHash": "eb4e835ec346cd0da2b16c4c14d14ba25e46dcc674dbeaf33ae4088b601742b4"
+          },
+          "observations": [
+            "Warranty campaign image and short registration explanation precede a long native product grid.",
+            "The page labelled Support is visibly a narrow registration campaign with purchasable pressure cleaners, not a general help centre."
+          ],
+          "transferablePrinciples": [
+            "Classify by visible page purpose rather than navigation label; registration claims require the new brand's own verified offer."
+          ],
+          "differenceFromHome": "A short service introduction plus commerce grid replaces the homepage's many promotional topics."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "blackroll",
@@ -258,7 +597,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 8,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -267,8 +606,62 @@
           "analyzedAt": "2026-05-23",
           "pageCount": 8,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Faszienrollen",
+          "sourceUrl": "https://www.amazon.de/stores/page/0C47A3FC-C1D2-4C30-B03C-86EDFB3B607A",
+          "pageRole": "category_commerce",
+          "capturedAt": "2026-11-21T18:15:37.341Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/blackroll-97caa1d3c1eb0cf6.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/blackroll-97caa1d3c1eb0cf6-review.png",
+            "width": 1440,
+            "height": 5811,
+            "imagesComplete": true,
+            "sourceHtmlHash": "68c66d662b1a3f69d8c8db9492720a4b4e41a734e1e6031d45355fc9d12312a9"
+          },
+          "observations": [
+            "Lifestyle benefit banner leads to native product rows and an asymmetric bestseller photo/product grouping.",
+            "Large product/benefit pairs, configurator callout, slim icon band, app image and related-category tiles extend selection."
+          ],
+          "transferablePrinciples": [
+            "Mix buyable product selection with distinct usage or differentiation units; reserve icon bands for concise verified benefits."
+          ],
+          "differenceFromHome": "Commerce grid is more prominent than on the homepage; explanation remains in large controlled blocks."
+        },
+        {
+          "pageName": "Über BLACKROLL",
+          "sourceUrl": "https://www.amazon.de/stores/page/031EB79B-C8A4-4E6D-ADBF-B84F0D3957ED",
+          "pageRole": "brand_story",
+          "capturedAt": "2026-11-21T18:15:41.363Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/blackroll-119e4c23c00e8f9a.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/blackroll-119e4c23c00e8f9a-review.png",
+            "width": 1440,
+            "height": 3675,
+            "imagesComplete": true,
+            "sourceHtmlHash": "c92f8615b86ee2148408b980f13f5c493cd4e26660d4886be9067030ac9698a9"
+          },
+          "observations": [
+            "Alternating dark text squares and lifestyle squares explain mission and tools.",
+            "A light four-column icon/explanation band, app graphic and awards row provide supporting information."
+          ],
+          "transferablePrinciples": [
+            "Use a consistent image/text pairing for brand narrative and a separate compact evidence band."
+          ],
+          "differenceFromHome": "Story-led, without the category page's dominant product grid; shared square pairing maintains continuity."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "more-nutrition",
@@ -304,7 +697,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 17,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -313,8 +706,62 @@
           "analyzedAt": "2026-05-23",
           "pageCount": 10,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "PROTEINE",
+          "sourceUrl": "https://www.amazon.de/stores/page/9A82B50C-BA5A-4A3B-ADBB-7B729770F289",
+          "pageRole": "category_selection",
+          "capturedAt": "2026-11-21T18:15:53.673Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/more-nutrition-a9ce392de540cc06.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/more-nutrition-a9ce392de540cc06-review.png",
+            "width": 1440,
+            "height": 3093,
+            "imagesComplete": true,
+            "sourceHtmlHash": "f377e6cb0297dc43925eb93418fc1ef76b2dc4d83c4c6f4aaadc20a301f76f4d"
+          },
+          "observations": [
+            "Saturated benefit-led family banners alternate left/right with pairs of native product cards.",
+            "Large drinks and pack renderings carry communication; small icon sets sit within each family creative."
+          ],
+          "transferablePrinciples": [
+            "Alternate a family creative with its relevant buyable products when subfamilies need routing."
+          ],
+          "differenceFromHome": "Structured family alternation, rather than reproducing the homepage's full assortment discovery."
+        },
+        {
+          "pageName": "CHUNKY FLAVOUR",
+          "sourceUrl": "https://www.amazon.de/stores/page/D5FF78A5-8306-4D4B-80F7-F20BFBA08472",
+          "pageRole": "flavour_commerce",
+          "capturedAt": "2026-11-21T18:15:58.873Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/more-nutrition-62831a346ed42d1f.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/more-nutrition-62831a346ed42d1f-review.png",
+            "width": 1440,
+            "height": 3852,
+            "imagesComplete": true,
+            "sourceHtmlHash": "64359d36242cd7327d30215424db65624c4ecf25a6aab11813cefe93f35ee164"
+          },
+          "observations": [
+            "One native product spotlight leads a long flavour grid on white.",
+            "A single colourful all-products banner closes the page; little explanatory editorial content."
+          ],
+          "transferablePrinciples": [
+            "For a known product line, native variant selection may be sufficient; avoid adding editorial modules without a purpose."
+          ],
+          "differenceFromHome": "Far more commerce-led and less creative-rich than the colourful homepage."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "hansegruen",
@@ -350,7 +797,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 20,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -359,8 +806,62 @@
           "analyzedAt": "2026-05-23",
           "pageCount": 10,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Shots",
+          "sourceUrl": "https://www.amazon.de/stores/page/E3FD5652-9AC5-4AC2-BD9C-F784C33A22D5",
+          "pageRole": "category_commerce",
+          "capturedAt": "2026-11-21T18:16:10.450Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/hansegruen-9790c1d283f3e9c5.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/hansegruen-9790c1d283f3e9c5-review.png",
+            "width": 1440,
+            "height": 3203,
+            "imagesComplete": true,
+            "sourceHtmlHash": "f07938724d9f62d393b053608d264087b97cd4dcceb9e39be1c0b842d18f0431"
+          },
+          "observations": [
+            "Short pack-and-ingredient category banner precedes a long regular native product grid.",
+            "Colour comes largely from packaging and ingredient photos; a quiet brand seal ends the page."
+          ],
+          "transferablePrinciples": [
+            "A focused range page can use one orientation creative followed by native selection; do not invent extra storytelling."
+          ],
+          "differenceFromHome": "Simpler assortment access than the homepage; common natural photography and restrained surroundings remain."
+        },
+        {
+          "pageName": "Über Uns",
+          "sourceUrl": "https://www.amazon.de/stores/page/FE5A6FE8-EC0C-49F0-A53E-48C85B7E36EE",
+          "pageRole": "founder_story",
+          "capturedAt": "2026-11-21T18:16:18.361Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/hansegruen-5cf1105d47219636.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/hansegruen-5cf1105d47219636-review.png",
+            "width": 1440,
+            "height": 4534,
+            "imagesComplete": true,
+            "sourceHtmlHash": "938ffc3d0db8ee70717ab4a2197643e520adfb7470c8cf08328436d24bbcdce6"
+          },
+          "observations": [
+            "Large founder portraits alternate with substantial first-person biography panels.",
+            "Ingredient quality and refill practices appear in smaller paired image/text units after the founder narrative."
+          ],
+          "transferablePrinciples": [
+            "Give founder story its own narrative hierarchy, then evidence practices with relevant photography."
+          ],
+          "differenceFromHome": "Much more text-rich and biographical than the product discovery homepage."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "holy-energy",
@@ -396,7 +897,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 12,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -405,8 +906,86 @@
           "analyzedAt": "2026-05-23",
           "pageCount": 10,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 3,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Energy",
+          "sourceUrl": "https://www.amazon.de/stores/page/18BC62B2-B4AF-4995-B743-E80AECFA53AA",
+          "pageRole": "category_commerce",
+          "capturedAt": "2026-11-21T18:16:32.523Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/holy-energy-29ce6f248d212851.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/holy-energy-29ce6f248d212851-review.png",
+            "width": 1440,
+            "height": 6016,
+            "imagesComplete": true,
+            "sourceHtmlHash": "b3eb7a8d15c00745f35c3a048c564dfba79e2df848acf457eb6b946492c6ef1f"
+          },
+          "observations": [
+            "Oversized pack/shaker/fruit still life leads into native product spotlights, a small illustrated benefit band and a long flavour grid.",
+            "The large colourful introduction gives way to white commerce modules."
+          ],
+          "transferablePrinciples": [
+            "Use a strong product-world introduction, then make flavour selection straightforward; separate graphic benefits from product cards."
+          ],
+          "differenceFromHome": "Less multi-category discovery than the homepage despite sharing its bold playful visual vocabulary."
+        },
+        {
+          "pageName": "Für Neueinsteiger",
+          "sourceUrl": "https://www.amazon.de/stores/page/E0597C1D-5961-4E87-9CA5-2FAF0299330D",
+          "pageRole": "starter_selection",
+          "capturedAt": "2026-11-21T18:16:35.097Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/holy-energy-d26bc884aea1891a.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/holy-energy-d26bc884aea1891a-review.png",
+            "width": 1440,
+            "height": 3327,
+            "imagesComplete": true,
+            "sourceHtmlHash": "faacbaa3018c953b81a9549299e1811a091640d5961053a2adb0a18d41b97830"
+          },
+          "observations": [
+            "Starter-kit unpacking photo dominates the lead, then a compact starter-product row.",
+            "Illustrated benefit band and colourful category tiles route into the wider range after the starter offer."
+          ],
+          "transferablePrinciples": [
+            "Match onboarding imagery to the starter offer, then provide onward discovery rather than duplicating the full catalogue."
+          ],
+          "differenceFromHome": "Shorter and more guided for first-time shoppers than the broad homepage."
+        },
+        {
+          "pageName": "Über uns",
+          "sourceUrl": "https://www.amazon.de/stores/page/69AF9424-DDC3-4F16-8AE0-F35BB75BD83A",
+          "pageRole": "founder_story",
+          "capturedAt": "2026-11-21T18:16:46.203Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/holy-energy-7296eff4b17df06f.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/holy-energy-7296eff4b17df06f-review.png",
+            "width": 1440,
+            "height": 2797,
+            "imagesComplete": true,
+            "sourceHtmlHash": "1bc39204533b78b78275701e51d9669f066838fce04134fedd9b98f113f3a030"
+          },
+          "observations": [
+            "Large founders portrait followed by one concise text/photo pair and the illustrated benefit strip.",
+            "The narrative stays unusually short; no long company chronology or native product grid."
+          ],
+          "transferablePrinciples": [
+            "A brand story can be a concise human introduction when that is sufficient, using real supplied people imagery."
+          ],
+          "differenceFromHome": "Human founder imagery replaces the homepage's broad colourful product discovery."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "manscaped",
@@ -442,7 +1021,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 7,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -451,8 +1030,62 @@
           "analyzedAt": "2026-05-13",
           "pageCount": 6,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Kopf & Körper",
+          "sourceUrl": "https://www.amazon.de/stores/page/8378B173-54DF-410C-AF93-45DC9BC292ED",
+          "pageRole": "routine_category",
+          "capturedAt": "2026-11-21T18:16:54.324Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/manscaped-3c487ff5794a1555.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/manscaped-3c487ff5794a1555-review.png",
+            "width": 1440,
+            "height": 5085,
+            "imagesComplete": true,
+            "sourceHtmlHash": "13d22ae0a0a1445433bb88b10495345cb34b73ba8f6d9d21c4294eb1740ba7ff"
+          },
+          "observations": [
+            "Small multi-column usage tiles combine hands-on photography, dark explanation strips and product cutouts.",
+            "Larger grooming-device render banners and close-up technology panels create a second scale of communication."
+          ],
+          "transferablePrinciples": [
+            "Use hands-on imagery for routine steps and larger technical renders for device differentiation; state these asset needs in designer briefs."
+          ],
+          "differenceFromHome": "More detailed routine and technology explanation than homepage routing; mixed tile scales organise it."
+        },
+        {
+          "pageName": "Intimpflege",
+          "sourceUrl": "https://www.amazon.de/stores/page/5E8779F0-69E8-4B1B-919E-8D608323F41C",
+          "pageRole": "routine_and_range",
+          "capturedAt": "2026-11-21T18:17:10.745Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/manscaped-f1936804e40863e8.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/manscaped-f1936804e40863e8-review.png",
+            "width": 1440,
+            "height": 8812,
+            "imagesComplete": true,
+            "sourceHtmlHash": "b7eeca3407fbe44eca67c70188663715830bbe30c5f473b0d362c9aa58fb9d09"
+          },
+          "observations": [
+            "A playful product lead and usage-card matrix precede larger device, lineup and bundle creatives.",
+            "Alternating care product panels, gift-set commerce and an icon explanation band build a long routine journey."
+          ],
+          "transferablePrinciples": [
+            "Group routine, device comparison, bundles and evidence into legible stages rather than repeating equal product tiles."
+          ],
+          "differenceFromHome": "Longer explanatory routine page, with more scale changes than a simple category hub."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "desktronic",
@@ -488,7 +1121,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 7,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -497,8 +1130,62 @@
           "analyzedAt": "2026-05-13",
           "pageCount": 7,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "HomePro Schreibtisch",
+          "sourceUrl": "https://www.amazon.de/stores/page/5C77F5BF-E87C-439D-B24B-BFAB70D81229",
+          "pageRole": "product_explanation",
+          "capturedAt": "2026-11-21T18:17:22.065Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/desktronic-50ea31a7f432c585.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/desktronic-50ea31a7f432c585-review.png",
+            "width": 1440,
+            "height": 8397,
+            "imagesComplete": true,
+            "sourceHtmlHash": "b778dd496f6a106c2c49492ed33a4626cf19d15fd9b1c3daadbce0991fe4d585"
+          },
+          "observations": [
+            "A desk demonstration poster and native spotlight lead into alternating technical close-up/text panels.",
+            "Large mechanism renders, stability information and finish imagery precede native variants."
+          ],
+          "transferablePrinciples": [
+            "Explain a considered product through supplied technical details and close-ups, then show selectable variants; video posters alone do not prove playback."
+          ],
+          "differenceFromHome": "Focused technical product story, rather than homepage category discovery; some video areas cannot be assessed from the still capture."
+        },
+        {
+          "pageName": "Zubehör",
+          "sourceUrl": "https://www.amazon.de/stores/page/8C7A8AE9-1F24-4831-8F46-7CEB09ED2B5E",
+          "pageRole": "accessory_selection",
+          "capturedAt": "2026-11-21T18:17:28.976Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/desktronic-3f2d64c99f8079ad.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/desktronic-3f2d64c99f8079ad-review.png",
+            "width": 1440,
+            "height": 3916,
+            "imagesComplete": true,
+            "sourceHtmlHash": "44d13b2ef692f5087d10d387703aa87cd5487160a71eabb26d4f0f9dd69df680"
+          },
+          "observations": [
+            "Warm work-scene video poster precedes restrained accessory render tiles on very light backgrounds.",
+            "A separate evidence/guarantee row and native accessories grid follow the category routes."
+          ],
+          "transferablePrinciples": [
+            "Use clean object-focused tiles for accessory selection, with compatibility and evidence only when supplied."
+          ],
+          "differenceFromHome": "A quieter functional selection page than homepage discovery; still combines warm context with clean renders."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "cloudpillo",
@@ -534,7 +1221,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 7,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -543,8 +1230,62 @@
           "analyzedAt": "2026-05-13",
           "pageCount": 7,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Kissen",
+          "sourceUrl": "https://www.amazon.de/stores/page/D73418D9-C2AA-46C1-95C3-C7C1E13EBA10",
+          "pageRole": "category_commerce",
+          "capturedAt": "2026-11-21T18:17:37.168Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/cloudpillo-4c2bc70f09b8f0a9.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/cloudpillo-4c2bc70f09b8f0a9-review.png",
+            "width": 1440,
+            "height": 2886,
+            "imagesComplete": true,
+            "sourceHtmlHash": "b95aa8aa0a1a5cab2218a1e9ac66e96085aae9a8708ae774220f4fbd4080bfc6"
+          },
+          "observations": [
+            "Blue lifestyle benefit banner is followed directly by a native pillow-and-accessory grid.",
+            "Most page area serves product selection; explanatory graphics are limited."
+          ],
+          "transferablePrinciples": [
+            "One clear category promise can be enough before native selection."
+          ],
+          "differenceFromHome": "Less editorial and shorter than the homepage's broader brand communication."
+        },
+        {
+          "pageName": "Unsere Mission",
+          "sourceUrl": "https://www.amazon.de/stores/page/49C41ED6-29D9-4150-8735-3C811514ACF2",
+          "pageRole": "brand_mission",
+          "capturedAt": "2026-11-21T18:17:43.856Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/cloudpillo-22601f9c78bae0b0.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/cloudpillo-22601f9c78bae0b0-review.png",
+            "width": 1440,
+            "height": 2900,
+            "imagesComplete": true,
+            "sourceHtmlHash": "a3244cca0c79a4b5c30d2eb247f1d77346a82bb17def3c2e14c22a66c8057930"
+          },
+          "observations": [
+            "Playful blue lifestyle lead is followed by a centered mission statement and a strip of real team/founder photos.",
+            "A second large lifestyle route and a compact four-icon proof/service band close the page."
+          ],
+          "transferablePrinciples": [
+            "Use people imagery as mission evidence and keep supporting benefits in a separate concise band."
+          ],
+          "differenceFromHome": "Mission/team narrative replaces the category page's long product grid; playful brand world remains."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "bedsure",
@@ -580,7 +1321,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 14,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -589,8 +1330,62 @@
           "analyzedAt": "2026-05-12",
           "pageCount": 4,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Über Bedsure",
+          "sourceUrl": "https://www.amazon.de/stores/page/ED1B32C3-3890-4245-8A84-ECD16C98BFAF",
+          "pageRole": "brand_story",
+          "capturedAt": "2026-11-21T18:18:00.691Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/bedsure-b3c4f524637a19ff.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/bedsure-b3c4f524637a19ff-review.png",
+            "width": 1440,
+            "height": 3494,
+            "imagesComplete": true,
+            "sourceHtmlHash": "2aed1c8feaf974a5ad797673e0c9dd2481913b2f17abdd3bfaec1e6ba933a6a4"
+          },
+          "observations": [
+            "Warm bedroom lifestyle lead and a large craft/production text-photo pair introduce the brand.",
+            "Sub-brand image columns and certification row extend the narrative, followed by a quiet textile closing image."
+          ],
+          "transferablePrinciples": [
+            "Separate brand narrative, collection roles and substantiated evidence; use tactile photography to support the story."
+          ],
+          "differenceFromHome": "More prose and production context than homepage category browsing."
+        },
+        {
+          "pageName": "Bettwäsche-Sets",
+          "sourceUrl": "https://www.amazon.de/stores/page/D537A0F0-8099-477C-A9CE-4E44DA3B8F13",
+          "pageRole": "category_selection",
+          "capturedAt": "2026-11-21T18:18:03.264Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/bedsure-d64df8b7a23c9f88.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/bedsure-d64df8b7a23c9f88-review.png",
+            "width": 1440,
+            "height": 8108,
+            "imagesComplete": true,
+            "sourceHtmlHash": "ea17413a562165f118108803c6088777e78b6dbcc84a88d05fee6361d34b46e8"
+          },
+          "observations": [
+            "Material-led groups combine a large bed/lifestyle image with smaller material detail and native product pairs.",
+            "Larger seasonal image pairs lead into a native assortment grid and related bedroom routes."
+          ],
+          "transferablePrinciples": [
+            "Group by a meaningful material or use distinction, alternating contextual imagery with actual selectable products."
+          ],
+          "differenceFromHome": "A deeper category exploration with more native selection than homepage-wide routing."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "feandrea",
@@ -626,7 +1421,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 19,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -635,8 +1430,86 @@
           "analyzedAt": "2026-05-23",
           "pageCount": 10,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 3,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "FÜR KATZEN",
+          "sourceUrl": "https://www.amazon.de/stores/page/2473A208-0A9B-400F-BEE1-5524BD21C6CE",
+          "pageRole": "species_category",
+          "capturedAt": "2026-11-21T18:18:19.797Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/feandrea-8e53e90b69910517.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/feandrea-8e53e90b69910517-review.png",
+            "width": 1440,
+            "height": 5179,
+            "imagesComplete": true,
+            "sourceHtmlHash": "a84d27fb709d08ccf5b4cc0dcd9f0efbfde4d566a29c7a5eca8c5d3cd66ac704"
+          },
+          "observations": [
+            "Species-specific banner precedes plainly labelled native product groups for trees, litter furniture and fountains.",
+            "White space and pack/cutout selection dominate; little lifestyle storytelling beyond the header."
+          ],
+          "transferablePrinciples": [
+            "A species hub can organise genuine subcategories through native product groups without forcing decorative creatives."
+          ],
+          "differenceFromHome": "Substantially plainer and more product-led than the branded homepage."
+        },
+        {
+          "pageName": "Kratzbäume",
+          "sourceUrl": "https://www.amazon.de/stores/page/0969F474-6991-44A8-864E-BAC3587E4935",
+          "pageRole": "category_education",
+          "capturedAt": "2026-11-21T18:18:33.505Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/feandrea-a985cc34b0fc4cdb.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/feandrea-a985cc34b0fc4cdb-review.png",
+            "width": 1440,
+            "height": 8662,
+            "imagesComplete": true,
+            "sourceHtmlHash": "b889a4f8b5db568b812751715b2b4ac85f53a9eeaa97e3d22991326244624c85"
+          },
+          "observations": [
+            "Room-scene lead and demonstration poster introduce cat trees; age/need selection and material/size groups follow.",
+            "Asymmetric large product-in-room tiles pair with smaller detail/benefit images and native product selections, then a larger grid."
+          ],
+          "transferablePrinciples": [
+            "Use need-based groups and scale changes when they simplify selection; contextual photos and detail images have distinct jobs."
+          ],
+          "differenceFromHome": "More instructional and deeper within one family than the general homepage."
+        },
+        {
+          "pageName": "Über uns",
+          "sourceUrl": "https://www.amazon.de/stores/page/9FD71EC8-799E-4138-B6F0-1BA84F03F656",
+          "pageRole": "brand_story_and_evidence",
+          "capturedAt": "2026-11-21T18:18:59.618Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/feandrea-6328d8a7db6a07f8.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/feandrea-6328d8a7db6a07f8-review.png",
+            "width": 1440,
+            "height": 7773,
+            "imagesComplete": true,
+            "sourceHtmlHash": "9a2ea63cc7e112aae1192cd641305a02e685a9ebdd9c9b28a4d2ae7b0f5eb800"
+          },
+          "observations": [
+            "Human/pet lead and video poster introduce the story, followed by brand-family diagram, metrics and world map.",
+            "Four practice panels mix explanatory copy and photos, then awards, social projects and user pet-image collages."
+          ],
+          "transferablePrinciples": [
+            "Separate corporate story, supported evidence and community imagery into distinct units; do not transfer another company's numbers or awards."
+          ],
+          "differenceFromHome": "Substantially denser company/evidence narrative than the shopping homepage."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "klosterkitchen",
@@ -672,7 +1545,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 9,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -681,8 +1554,62 @@
           "analyzedAt": "2026-05-13",
           "pageCount": 10,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Ingwer Shots",
+          "sourceUrl": "https://www.amazon.de/stores/page/EF234CA2-C1C8-4B07-B2CC-1553E231D3F2",
+          "pageRole": "category_and_bundle_selection",
+          "capturedAt": "2026-11-21T18:19:00.373Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/klosterkitchen-c57527341acdf44b.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/klosterkitchen-c57527341acdf44b-review.png",
+            "width": 1440,
+            "height": 6646,
+            "imagesComplete": true,
+            "sourceHtmlHash": "657b03d2fc687d221b2aa9492453093f7b0642ac13a3cc79c9e3f22586b50cf2"
+          },
+          "observations": [
+            "Lifestyle poster and short category introduction precede sparse bottle cutout groups on white.",
+            "Lifestyle image pairs transition into asymmetrical box/bundle groupings, then another everyday-use photograph."
+          ],
+          "transferablePrinciples": [
+            "Use open product groupings for variants and a distinct bundle area when relevant; alternate practical usage photos with commerce."
+          ],
+          "differenceFromHome": "Focused on shot formats and bundles rather than all homepage product worlds."
+        },
+        {
+          "pageName": "Über Uns",
+          "sourceUrl": "https://www.amazon.de/stores/page/F031D76B-9B76-426A-93A9-2EBBCB5150CF",
+          "pageRole": "brand_story",
+          "capturedAt": "2026-11-21T18:19:20.080Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/klosterkitchen-c42f8b908c730b25.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/klosterkitchen-c42f8b908c730b25-review.png",
+            "width": 1440,
+            "height": 4176,
+            "imagesComplete": true,
+            "sourceHtmlHash": "54688362a9c33acfca0da6d819daf4747e6186ceed770030dc1ebeef7d2b9895"
+          },
+          "observations": [
+            "Warehouse/team poster and short company introduction lead into alternating collage/text story blocks.",
+            "Ingredient, team, everyday-use and packaging imagery create small overlapping layers; awards sit in a final graphic strip."
+          ],
+          "transferablePrinciples": [
+            "Layered collages can humanise a concise story when source images support it; keep each text block tied to a concrete topic."
+          ],
+          "differenceFromHome": "Human/operational narrative replaces the homepage's product-range emphasis."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "bears-with-benefits",
@@ -718,12 +1645,66 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 11,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
-        "historicalSubpageAnalysis": null
-      }
+        "historicalSubpageAnalysis": null,
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Für deine Haare",
+          "sourceUrl": "https://www.amazon.de/stores/page/E45E1287-A5C1-446F-9121-4ECB82E439BE",
+          "pageRole": "benefit_category",
+          "capturedAt": "2026-11-21T18:19:20.824Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/bears-with-benefits-7590035dd10b2d55.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/bears-with-benefits-7590035dd10b2d55-review.png",
+            "width": 1440,
+            "height": 4290,
+            "imagesComplete": true,
+            "sourceHtmlHash": "c94679ae253f67d4bd377f9a6a9def404d9d572f90b4e9f2e332c1c581d21975"
+          },
+          "observations": [
+            "Large person-and-product benefit lead precedes repeated lifestyle/product close-up pairs.",
+            "A native related-products grid follows, then one wider subscription campaign banner."
+          ],
+          "transferablePrinciples": [
+            "Pair contextual benefit imagery with a clear pack view, then provide actual product selection; claims must be independently supplied."
+          ],
+          "differenceFromHome": "A narrower repeated pairing within one need category rather than broad homepage navigation."
+        },
+        {
+          "pageName": "Über uns",
+          "sourceUrl": "https://www.amazon.de/stores/page/C7BA935B-3A14-485C-9A31-9389412562A3",
+          "pageRole": "founder_and_expertise",
+          "capturedAt": "2026-11-21T18:19:35.669Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/bears-with-benefits-9f4b0b112ed6dd08.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/bears-with-benefits-9f4b0b112ed6dd08-review.png",
+            "width": 1440,
+            "height": 3531,
+            "imagesComplete": true,
+            "sourceHtmlHash": "30a83e4ed1f7131fa35c3be5273c8feb7268352d1f5eb82840f4455d772034fe"
+          },
+          "observations": [
+            "Illustrated women-led mission lead moves into a founders portrait with a small product/mission mosaic.",
+            "A larger expert portrait/text panel follows, then bestseller and subscription routes."
+          ],
+          "transferablePrinciples": [
+            "Use distinct founder and expertise evidence blocks where substantiated; people are not interchangeable decorative assets."
+          ],
+          "differenceFromHome": "More identity and expertise explanation than homepage shopping discovery."
+        }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "twentythree",
@@ -759,7 +1740,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 5,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -768,8 +1749,62 @@
           "analyzedAt": "2026-05-13",
           "pageCount": 5,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Bettwäsche",
+          "sourceUrl": "https://www.amazon.de/stores/page/15C8BFA1-4A3D-4C7E-82A3-2A626199A6B7",
+          "pageRole": "material_category",
+          "capturedAt": "2026-11-21T18:19:39.858Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/twentythree-efe35a275006539e.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/twentythree-efe35a275006539e-review.png",
+            "width": 1440,
+            "height": 3533,
+            "imagesComplete": true,
+            "sourceHtmlHash": "2044f8b04340fa4a5fb4b26f5602514dd12c1c951fadc3689fcc4d57bc4decd2"
+          },
+          "observations": [
+            "Dark compact material statement precedes alternating lifestyle square plus fabric-detail/native-product groupings.",
+            "A small native variant row interrupts the repeated groups; short bold benefit labels sit within material photos."
+          ],
+          "transferablePrinciples": [
+            "Contrast whole-room use with fabric close-ups and actual variants when material feel drives selection."
+          ],
+          "differenceFromHome": "Deeper repeated material/benefit treatment than homepage breadth; restrained imagery stays consistent."
+        },
+        {
+          "pageName": "Bettdecke & Kissen",
+          "sourceUrl": "https://www.amazon.de/stores/page/F43A372B-1D99-4754-8B6F-879D8E039AF8",
+          "pageRole": "compact_category",
+          "capturedAt": "2026-11-21T18:19:49.772Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/twentythree-183673b880cb74b9.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/twentythree-183673b880cb74b9-review.png",
+            "width": 1440,
+            "height": 2224,
+            "imagesComplete": true,
+            "sourceHtmlHash": "6de69034ab9883857a6cdf83f03f01c470a9f83e874764476d453e93ebfbbd51"
+          },
+          "observations": [
+            "Two mirrored groups pair bedding lifestyle squares with fabric-detail graphics and a single native product module each.",
+            "Short bold material/comfort labels and generous white space keep the page brief."
+          ],
+          "transferablePrinciples": [
+            "A small assortment can be expressed in two focused visual groups; group count follows the new range."
+          ],
+          "differenceFromHome": "Much shorter than broad homepage discovery and the bedding category, despite the same visual language."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "nightcat",
@@ -805,7 +1840,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 10,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -814,8 +1849,46 @@
           "analyzedAt": "2026-05-23",
           "pageCount": 10,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 1,
+        "selectedUnavailableSubpageCount": 1,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Wanderrucksäcke",
+          "sourceUrl": "https://www.amazon.de/stores/page/20A5B648-FC7B-4A1B-8E64-4C03A067AC8B",
+          "pageRole": "product_family_selection",
+          "capturedAt": "2026-11-21T18:20:13.335Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/nightcat-fff7d46bacf24fcc.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/nightcat-fff7d46bacf24fcc-review.png",
+            "width": 1440,
+            "height": 3442,
+            "imagesComplete": true,
+            "sourceHtmlHash": "f5bcc3071966e77e8cc79f6cf221a009c77b32f5488fe674dca9f3c64b35059d"
+          },
+          "observations": [
+            "Large product-detail collage or outdoor-use poster sits beside stacked native backpack variants.",
+            "Repeated split groups end with a wide hiking lifestyle poster; minimal editorial copy."
+          ],
+          "transferablePrinciples": [
+            "Pair a detailed object view or use scene with buyable related variants for a utilitarian family."
+          ],
+          "differenceFromHome": "Family selection dominates instead of homepage-wide outdoor category routing; only this subpage is visually confirmed."
         }
-      }
+      ],
+      "unavailableSubpages": [
+        {
+          "pageName": "Hängemattenzelt",
+          "sourceUrl": "https://www.amazon.de/stores/page/CE68CD68-132D-4570-84C5-31DDBDBD873F",
+          "status": "not_visually_reviewed",
+          "attempts": 2,
+          "reason": "Original image or video-poster assets remained unloadable; incomplete capture rejected. No layout conclusion drawn."
+        }
+      ]
     },
     {
       "id": "masterchef",
@@ -851,7 +1924,7 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 20,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
@@ -860,8 +1933,62 @@
           "analyzedAt": "2026-05-23",
           "pageCount": 10,
           "status": "historical_only_not_revalidated"
+        },
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Kochgeschirr",
+          "sourceUrl": "https://www.amazon.de/stores/page/91EE7C50-94C4-4AEF-85D6-5CEC3D1AF277",
+          "pageRole": "cookware_selection",
+          "capturedAt": "2026-11-21T18:20:18.750Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/masterchef-4fd22fa9e586dfcc.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/masterchef-4fd22fa9e586dfcc-review.png",
+            "width": 1440,
+            "height": 6010,
+            "imagesComplete": true,
+            "sourceHtmlHash": "674af77734322c4116d02e5c212b6bfa2b4a511d48e5c4f2557d397287e3ee6e"
+          },
+          "observations": [
+            "Two wide kitchen-scene collection creatives precede repeated cooking-use image and native product pairs.",
+            "Category labels appear in quiet light overlays within the usage photos; white product areas stay uncluttered."
+          ],
+          "transferablePrinciples": [
+            "Contrast product-in-use contexts with clean selectable objects and use short functional route labels."
+          ],
+          "differenceFromHome": "More systematic cookware/type selection than homepage-wide assortment discovery."
+        },
+        {
+          "pageName": "Professionelle Kollektion",
+          "sourceUrl": "https://www.amazon.de/stores/page/987B2255-9774-46FA-A3AE-A5E510D61209",
+          "pageRole": "collection_commerce",
+          "capturedAt": "2026-11-21T18:20:29.956Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/masterchef-3efb60558319a51a.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/masterchef-3efb60558319a51a-review.png",
+            "width": 1440,
+            "height": 3093,
+            "imagesComplete": true,
+            "sourceHtmlHash": "0f10d3c1fb33172752ec233bee410578393d03e2aab605711197036a01dcf4f1"
+          },
+          "observations": [
+            "One large arranged knife still life introduces the collection.",
+            "Native knife selection grid and a separate product spotlight fill most remaining page area."
+          ],
+          "transferablePrinciples": [
+            "A collection can use a single strong arrangement followed by native shopping modules; no fixed editorial quota."
+          ],
+          "differenceFromHome": "Far shorter and more commerce-led than the broad homepage and cookware selection page."
         }
-      }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "natural-elements",
@@ -897,12 +2024,66 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 57,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
-        "historicalSubpageAnalysis": null
-      }
+        "historicalSubpageAnalysis": null,
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Nerven & Energie",
+          "sourceUrl": "https://www.amazon.de/stores/page/2A4CBB9C-0C16-48EF-B384-E47188AA20AA",
+          "pageRole": "need_category",
+          "capturedAt": "2026-11-21T18:20:35.856Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/natural-elements-a114bc860ac57d07.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/natural-elements-a114bc860ac57d07-review.png",
+            "width": 1440,
+            "height": 4293,
+            "imagesComplete": true,
+            "sourceHtmlHash": "99d1489d9a254988e2d941f0b2a260f11241343c71b983811c5a49bab7bb8381"
+          },
+          "observations": [
+            "Lifestyle need-state banner and a short coloured explanation panel precede native product spotlight and grid.",
+            "Two slim lifestyle routes guide towards related needs before an all-products link."
+          ],
+          "transferablePrinciples": [
+            "Use one need-state introduction then relevant products and narrow onward routes; health claims are not transferable."
+          ],
+          "differenceFromHome": "Need-specific commerce journey, rather than general homepage breadth."
+        },
+        {
+          "pageName": "Melatonin",
+          "sourceUrl": "https://www.amazon.de/stores/page/6901DCDE-4293-4134-A4F6-E09B8E48BB84",
+          "pageRole": "format_comparison",
+          "capturedAt": "2026-11-21T18:20:49.083Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/natural-elements-eca3032b31c254f8.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/natural-elements-eca3032b31c254f8-review.png",
+            "width": 1440,
+            "height": 2016,
+            "imagesComplete": true,
+            "sourceHtmlHash": "fd4c34f804a35028b70b4fe83dd675a48cbca6bf16d594a5c7bf7fcff4035ab5"
+          },
+          "observations": [
+            "Four vertically repeated pairs show a clean product module left and a compact icon/bullet feature panel right.",
+            "No lifestyle hero or broad category navigation interrupts the format comparison."
+          ],
+          "transferablePrinciples": [
+            "A focused format comparison may omit a hero entirely; show only verified differences in consistent adjacent panels."
+          ],
+          "differenceFromHome": "Much more compact and comparison-led than the lifestyle-oriented homepage."
+        }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "store-5cb87a1c",
@@ -938,12 +2119,66 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 5,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
-        "historicalSubpageAnalysis": null
-      }
+        "historicalSubpageAnalysis": null,
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Darm & Verdauung",
+          "sourceUrl": "https://www.amazon.de/stores/page/69D982D6-F38C-43D1-9336-89CA3EC0C26C",
+          "pageRole": "need_category",
+          "capturedAt": "2026-11-21T18:20:50.806Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/store-5cb87a1c-65e11068996bdc05.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/store-5cb87a1c-65e11068996bdc05-review.png",
+            "width": 1440,
+            "height": 3357,
+            "imagesComplete": true,
+            "sourceHtmlHash": "4b1f81afbdb6b093b5bed1a9bad56e6839911838feb9b636f400113147a73454"
+          },
+          "observations": [
+            "Pack group and lifestyle blend introduces the category, followed by a quiet four-icon standards band.",
+            "Native assortment grid fills most remaining page length; short descriptive header stays separate."
+          ],
+          "transferablePrinciples": [
+            "Keep category orientation, substantiated trust evidence and product selection distinct."
+          ],
+          "differenceFromHome": "A simpler need-specific selection page than homepage-wide browsing."
+        },
+        {
+          "pageName": "Migräne",
+          "sourceUrl": "https://www.amazon.de/stores/page/50D31D19-B268-47A4-9092-C39C9373D1E6",
+          "pageRole": "single_product_need",
+          "capturedAt": "2026-11-21T18:21:04.833Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/store-5cb87a1c-be0e664e9fff10e1.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/store-5cb87a1c-be0e664e9fff10e1-review.png",
+            "width": 1440,
+            "height": 2250,
+            "imagesComplete": true,
+            "sourceHtmlHash": "530523c592ed29a08137c45a243c659169a9864a571c2c2d4fac9709b571ba83"
+          },
+          "observations": [
+            "Single pack-and-person composition precedes the same four-icon standards band used on the digestion page.",
+            "One native product spotlight completes a very short journey."
+          ],
+          "transferablePrinciples": [
+            "A single-product need page can remain short; do not expand it to match a broader category's module count."
+          ],
+          "differenceFromHome": "Same brand framing as the digestion page but a much shorter single-product implementation."
+        }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "einhell",
@@ -979,12 +2214,90 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 113,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
-        "historicalSubpageAnalysis": null
-      }
+        "historicalSubpageAnalysis": null,
+        "visuallyReviewedSubpageCount": 3,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Werkzeug",
+          "sourceUrl": "https://www.amazon.de/stores/page/BDED271F-3F0F-4018-B5E2-649682787654",
+          "pageRole": "category_directory",
+          "capturedAt": "2026-11-21T18:21:04.827Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/einhell-07917cf0b809e7c0.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/einhell-07917cf0b809e7c0-review.png",
+            "width": 1440,
+            "height": 3030,
+            "imagesComplete": true,
+            "sourceHtmlHash": "09e93925cd2e73b004636dfe6d9506db594e04d06c4bf9889fc113855e8b501c"
+          },
+          "observations": [
+            "Regular four-column cutout-and-label directory dominates on white.",
+            "Little prose or lifestyle content; a battery-system graphic closes the directory."
+          ],
+          "transferablePrinciples": [
+            "A broad utilitarian directory may rely on recognisable objects and concise labels rather than lifestyle narratives."
+          ],
+          "differenceFromHome": "Much more systematic directory-like navigation than the homepage's varied campaigns."
+        },
+        {
+          "pageName": "Power X-Change",
+          "sourceUrl": "https://www.amazon.de/stores/page/5974F607-FC65-406B-9B4A-7D4D652FCB4A",
+          "pageRole": "compatibility_platform",
+          "capturedAt": "2026-11-21T18:21:22.706Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/einhell-2d03749b1e3505b9.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/einhell-2d03749b1e3505b9-review.png",
+            "width": 1440,
+            "height": 4949,
+            "imagesComplete": true,
+            "sourceHtmlHash": "24e3aac07bc3e8ef1d39ca813032017f3913b44d41836ae58552a0e5e6d08493"
+          },
+          "observations": [
+            "Battery cutaway/explanation introduces the shared system.",
+            "Red route bands divide tool, garden and household groups; usage thumbnails and large cutout arrangements show each application world."
+          ],
+          "transferablePrinciples": [
+            "Explain shared compatibility before application groups; communicate the ecosystem without copying another brand's device count."
+          ],
+          "differenceFromHome": "Platform-focused cross-category story rather than the homepage's campaigns or the plain tool directory."
+        },
+        {
+          "pageName": "Schlagschrauber",
+          "sourceUrl": "https://www.amazon.de/stores/page/9CBD3593-9F6D-473B-9683-F8CCC8E40D11",
+          "pageRole": "subcategory_commerce",
+          "capturedAt": "2026-11-21T18:21:22.916Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/einhell-fc4f6828448098ae.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/einhell-fc4f6828448098ae-review.png",
+            "width": 1440,
+            "height": 1989,
+            "imagesComplete": true,
+            "sourceHtmlHash": "c5ed01275c200f36336a1f95da8402768a13b11d93f71151d937ba277ea8ec42"
+          },
+          "observations": [
+            "Native impact-driver grid starts immediately under the global navigation.",
+            "A single battery-system closing graphic is the only non-native content below the grid."
+          ],
+          "transferablePrinciples": [
+            "A narrow known subcategory may need direct native shopping rather than a repeated hero and narrative."
+          ],
+          "differenceFromHome": "More minimal than the homepage or battery-platform page; shared global header is sufficient orientation."
+        }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "hshop-sport",
@@ -1020,12 +2333,90 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 50,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
-        "historicalSubpageAnalysis": null
-      }
+        "historicalSubpageAnalysis": null,
+        "visuallyReviewedSubpageCount": 3,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Hantelsets",
+          "sourceUrl": "https://www.amazon.de/stores/page/8A6E52A9-8800-4CC2-B75B-836015F284F2",
+          "pageRole": "subcategory_commerce",
+          "capturedAt": "2026-11-21T18:21:38.801Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/hshop-sport-1eb840955f8cd013.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/hshop-sport-1eb840955f8cd013-review.png",
+            "width": 1440,
+            "height": 3253,
+            "imagesComplete": true,
+            "sourceHtmlHash": "0d6b87a473b350c83c17d674ab937f065dcddd7484f64b7e2b4b17a5befe02aa"
+          },
+          "observations": [
+            "Krafttraining masthead leads straight into a long regular native weight-set grid.",
+            "No visible lifestyle sequence, depth treatment or explanatory modules are repeated within the body."
+          ],
+          "transferablePrinciples": [
+            "Do not apply the homepage's sophisticated creative treatment to every leaf category; simple selection can be appropriate."
+          ],
+          "differenceFromHome": "This is a counterexample to generalising the homepage's lifestyle and depth style to all pages."
+        },
+        {
+          "pageName": "Fitnessgeräte",
+          "sourceUrl": "https://www.amazon.de/stores/page/C00EC406-C355-4AEE-A1EB-732BF7EC04AD",
+          "pageRole": "equipment_category",
+          "capturedAt": "2026-11-21T18:21:43.468Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/hshop-sport-d36d8ba592ac34ec.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/hshop-sport-d36d8ba592ac34ec-review.png",
+            "width": 1440,
+            "height": 6303,
+            "imagesComplete": true,
+            "sourceHtmlHash": "118786a0c5cdcdf0d100f7bea391a379594b13ece5c4c324d4224437844d4cab"
+          },
+          "observations": [
+            "A small icon directory plus oversized lifestyle/depth image leads into repeated equipment groups.",
+            "Notched white labels enter lifestyle photos; large isolated product views and smaller native variants alternate; proof strip ends the page."
+          ],
+          "transferablePrinciples": [
+            "Use visual depth selectively in category creatives, paired with clean buyable products; brief layering and text/image relationships explicitly."
+          ],
+          "differenceFromHome": "Carries the homepage's layered lifestyle treatment into this broad category, unlike the plain weight-set leaf page."
+        },
+        {
+          "pageName": "Haus und Garten",
+          "sourceUrl": "https://www.amazon.de/stores/page/2BECFB5D-D045-4ECE-B9FE-FB4DB31B6ACF",
+          "pageRole": "compact_category",
+          "capturedAt": "2026-11-21T18:21:53.750Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/hshop-sport-7cf266d010ed5b0f.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/hshop-sport-7cf266d010ed5b0f-review.png",
+            "width": 1440,
+            "height": 2743,
+            "imagesComplete": true,
+            "sourceHtmlHash": "0f2c38b4119ce5448d0789df427f90cb4fc71e29d0edff1ca758000260a289f2"
+          },
+          "observations": [
+            "A notched-label trampoline lifestyle square pairs with native product selections.",
+            "Small line-icon category routes and the repeated proof strip close the short page; some native card areas are visibly sparse."
+          ],
+          "transferablePrinciples": [
+            "Scale the same category language down for a small range; do not reproduce sparse source cards or assume every slot is intentionally blank."
+          ],
+          "differenceFromHome": "Much shorter than Fitnessgeräte; related visual anchors remain but not its full module sequence."
+        }
+      ],
+      "unavailableSubpages": []
     },
     {
       "id": "felmo",
@@ -1061,12 +2452,75 @@
         "homepage": "visually_reviewed",
         "navigation": "retrieved",
         "discoveredNavigationEntries": 4,
-        "subpages": "not_newly_visually_reviewed",
+        "subpages": "representative_pages_visually_reviewed",
         "mobile": "not_visually_reviewed",
         "videoPlayback": "not_reviewed",
         "interactionBehaviour": "not_verified_from_screenshot",
-        "historicalSubpageAnalysis": null
-      }
+        "historicalSubpageAnalysis": null,
+        "visuallyReviewedSubpageCount": 2,
+        "selectedUnavailableSubpageCount": 0,
+        "allNavigationEntriesVisuallyReviewed": false
+      },
+      "subpagePatterns": [
+        {
+          "pageName": "Für Hunde",
+          "sourceUrl": "https://www.amazon.de/stores/page/ABE127DE-0465-4013-BC6E-C378A74DF796",
+          "pageRole": "species_commerce",
+          "capturedAt": "2026-11-21T18:21:58.234Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/felmo-81b7ca11b25c0d50.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/felmo-81b7ca11b25c0d50-review.png",
+            "width": 1440,
+            "height": 2878,
+            "imagesComplete": true,
+            "sourceHtmlHash": "cedb3bae6b367080e5c64e2834454ad84bf5e749e68048260dcbef1881368e3f"
+          },
+          "observations": [
+            "Playful dog-and-headline category banner leads directly to a native assortment grid.",
+            "Packaging and pet images provide colour within otherwise white shopping areas."
+          ],
+          "transferablePrinciples": [
+            "Keep a species category direct when orientation and product choice suffice."
+          ],
+          "differenceFromHome": "Simpler and more commerce-focused than homepage brand discovery."
+        },
+        {
+          "pageName": "Über Uns",
+          "sourceUrl": "https://www.amazon.de/stores/page/E7F28C9A-A6EC-4B2F-B19F-9568D44B5DF1",
+          "pageRole": "compact_brand_statement",
+          "capturedAt": "2026-11-21T18:22:07.213Z",
+          "reviewedAt": "2026-11-21",
+          "evidence": {
+            "kind": "full_desktop_subpage_screenshot",
+            "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/felmo-2f35d65a68f77934.png",
+            "reviewContactSheetUrl": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/reference-subpage-reviews/1795284785392/felmo-2f35d65a68f77934-review.png",
+            "width": 1440,
+            "height": 1551,
+            "imagesComplete": true,
+            "sourceHtmlHash": "178efc386fb1273ee259df2cad6c3703cda534cd420c12e2e192e59421b2266a"
+          },
+          "observations": [
+            "A single green panel combines short brand proposition and explanation with a large line-drawn team illustration.",
+            "Decorative wave line closes the page; no product grid or multi-section narrative."
+          ],
+          "transferablePrinciples": [
+            "A compact illustrated brand statement can be a complete page when the message is narrow; no mandatory story-module quota."
+          ],
+          "differenceFromHome": "Far shorter and more illustrative than a shopping homepage; distinct page purpose determines length."
+        }
+      ],
+      "unavailableSubpages": []
     }
-  ]
+  ],
+  "subpageReview": {
+    "reviewDate": "2026-11-21",
+    "selection": "Purposeful sample of category hubs, leaf categories, product lines, comparisons, compatibility platforms and editorial/brand pages; not every navigation entry.",
+    "attemptedPages": 55,
+    "visuallyReviewedPages": 54,
+    "unavailablePages": 1,
+    "method": "Visual review of full desktop captures in consecutive contact-sheet strips. Original image loading checks are recorded per capture; native card sparsity and video placeholders are not proof of intentional design or working playback.",
+    "application": "Match the target page task to a reviewed pageRole. Use observations as evidence, principles as optional transferable guidance and differenceFromHome to avoid generalising a homepage to the entire store. Recalculate structure, count and length from the new brand's own scope and assortment."
+  }
 }

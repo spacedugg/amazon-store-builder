@@ -24,13 +24,37 @@ test('current navigation inventory covers the active catalogue while distinguish
   if(row.status==='navigation_retrieved') assert(row.pages.length>0);
  }
 });
-test('bundled macro profiles cover every active reference and keep home observations separate from unreviewed subpages',async()=>{
+test('bundled macro profiles cover every active reference and keep homepage and representative subpage evidence separate',async()=>{
  const catalog=JSON.parse(await readFile(new URL('../src/data/storeReferenceCatalog.json',import.meta.url),'utf8'));
  const profiles=JSON.parse(await readFile(new URL('../data/store-knowledge/_reference_style_profiles.json',import.meta.url),'utf8'));
+ assert.equal(profiles.schemaVersion,2);
+ assert.equal(profiles.subpageReview.visuallyReviewedPages,54);
+ assert.equal(profiles.stores.reduce((sum,row)=>sum+row.subpagePatterns.length,0),54);
+ assert.equal(profiles.stores.reduce((sum,row)=>sum+row.unavailableSubpages.length,0),1);
+ const urls=profiles.stores.flatMap(row=>row.subpagePatterns.map(page=>page.sourceUrl));
+ assert.equal(new Set(urls).size,urls.length);
  assert.deepEqual(profiles.stores.map(r=>r.id).sort(),catalog.map(r=>r.id).sort());
  for(const row of profiles.stores){
   assert.equal(row.coverage.homepage,'visually_reviewed');
-  assert.equal(row.coverage.subpages,'not_newly_visually_reviewed');
+  assert.equal(row.coverage.subpages,'representative_pages_visually_reviewed');
+  assert.equal(row.coverage.allNavigationEntriesVisuallyReviewed,false);
+  assert.equal(row.coverage.visuallyReviewedSubpageCount,row.subpagePatterns.length);
+  assert.equal(row.coverage.selectedUnavailableSubpageCount,row.unavailableSubpages.length);
+  assert(row.subpagePatterns.length>0,row.id);
+  for(const page of row.subpagePatterns){
+   assert.equal(page.evidence.kind,'full_desktop_subpage_screenshot');
+   assert(page.sourceUrl.startsWith('https://www.amazon.de/stores/'));
+   assert(page.evidence.url.startsWith('https://') && page.evidence.imagesComplete);
+   assert(page.evidence.width>0 && page.evidence.height>0);
+   assert.match(page.evidence.sourceHtmlHash,/^[a-f0-9]{64}$/);
+   assert(page.capturedAt && page.reviewedAt && page.pageRole && page.differenceFromHome);
+   assert(page.observations.length && page.transferablePrinciples.length);
+  }
+  for(const page of row.unavailableSubpages){
+   assert.equal(page.status,'not_visually_reviewed');
+   assert(page.reason && page.sourceUrl);
+   assert(!row.subpagePatterns.some(review=>review.sourceUrl===page.sourceUrl));
+  }
   assert.equal(row.coverage.mobile,'not_visually_reviewed');
   assert.equal(row.coverage.interactionBehaviour,'not_verified_from_screenshot');
   assert(row.evidence.url.startsWith('https://')&&row.evidence.imagesComplete);
