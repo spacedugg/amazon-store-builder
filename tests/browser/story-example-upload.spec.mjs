@@ -70,3 +70,27 @@ test('designer example library remains read-only', async ({ page }) => {
   await expect(page.getByRole('button', { name: '+ Beispiel hinzufügen', exact: true })).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Beispiel bearbeiten', exact: true })).toHaveCount(0);
 });
+
+test('HOLY ZIP is available from overview and imports exact artwork assignments and product links without AI', async ({page})=>{
+  const {zipSync,strToU8}=await import('fflate');
+  const {readFileSync}=await import('node:fs');
+  const manifest=JSON.parse(readFileSync(new URL('../fixtures/holy-brand-story-manifest.json',import.meta.url)));
+  const files={'HOLY/brand-story.json':strToU8(JSON.stringify(manifest))};
+  for(const file of [manifest.background.desktop,...manifest.cards.flatMap(c=>c.type==='media'?[c.file]:c.slots.map(s=>s.file))])files['HOLY/'+file]=pixel;
+  const records=await setup(page);let visionRequests=0;
+  await page.route('**/api/brand-story-zip-analysis',route=>{visionRequests++;return route.fulfill({status:500,json:{error:'Must not request AI for explicit metadata'}});});
+  await expect(page.getByRole('button',{name:'Brand-Story-ZIP hochladen',exact:true})).toBeVisible();
+  await page.getByLabel('Brand-Story-ZIP',{exact:true}).setInputFiles({name:'HOLY.zip',mimeType:'application/zip',buffer:Buffer.from(zipSync(files))});
+  const editor=page.locator('.bs-example-editor');await expect(editor).toBeVisible({timeout:30000});
+  await expect(page.getByLabel('Marke',{exact:true})).toHaveValue('HOLY');
+  await expect(editor.locator('.bs-example-card')).toHaveCount(8);
+  expect(visionRequests).toBe(0);
+  await page.getByRole('button',{name:'Beispiel speichern',exact:true}).click();
+  await expect(editor.getByRole('alert').filter({hasText:'Speichern fehlgeschlagen'})).toContainText('Speichern fehlgeschlagen');
+  await page.getByRole('button',{name:'Beispiel speichern',exact:true}).click();
+  await expect(page.getByRole('status')).toContainText('Beispiel gespeichert');
+  const saved=records()[0].data;
+  expect(saved.cards.filter(c=>c.type==='grid').map(c=>c.headline)).toEqual(manifest.cards.filter(c=>c.type==='grid').map(c=>c.headline));
+  expect(saved.cards.flatMap(c=>c.slots.map(s=>s.asin))).toEqual(manifest.cards.flatMap(c=>(c.slots||[]).map(s=>s.asin)));
+  expect(saved.cards[2].shopUrl).toBe(manifest.cards[2].shopUrl);
+});

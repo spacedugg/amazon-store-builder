@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import StoryModal from './StoryModal';
 import { newStory } from '../../brandStoryModel.mjs';
 import StoryExampleEditor, { ExamplePreview } from './StoryExampleEditor';
@@ -13,6 +13,7 @@ const purposes = {
   Sanquell: 'Kategorien in der Anwendung zeigen und passende Produkte sowie Ersatzbedarf zugänglich machen.',
 };
 export default function StoryReferences({ onClose, canManage = false }) {
+  const zipInput=useRef(null);
   const [stories, setStories] = useState([]), [custom, setCustom] = useState([]);
   const [error, setError] = useState(''), [loading, setLoading] = useState(true);
   const [importProgress,setImportProgress]=useState(''), [importNotice,setImportNotice]=useState('');
@@ -45,7 +46,7 @@ export default function StoryReferences({ onClose, canManage = false }) {
       <button disabled={busy} onClick={() => leave(() => setDraft(null))}>← Alle Beispiele</button>
       {importNotice && <p role="status">{importNotice}</p>}<StoryExampleEditor draft={draft} busy={busy} setBusy={setBusy} onChange={value => { setDraft(value); setDirty(true); }} onSaved={value => { setCustom(items => [value, ...items.filter(item => item.id !== value.id)]); setDraft(null); setDirty(false); setMessage('Beispiel gespeichert – für Team und Designer verfügbar.'); }} />
     </> : <>
-      {importProgress && <p role="status">{importProgress}</p>}<div className="bs-example-actions">{canManage && <label className="bs-upload">ZIP importieren<input type="file" accept=".zip,application/zip" disabled={busy} onChange={event=>{if(event.target.files[0])importZip(event.target.files[0]);event.target.value='';}} /></label>}{canManage && <button className="bs-primary" onClick={() => { setDraft({ data: newStory(), purpose: '' }); setDirty(false); setMessage(''); setImportNotice(''); }} disabled={busy}>+ Beispiel hinzufügen</button>}</div>
+      {importProgress && <p role="status">{importProgress}</p>}<div className="bs-example-actions">{canManage && <><button type="button" className="bs-primary" disabled={busy} onClick={()=>zipInput.current?.click()}>Brand-Story-ZIP hochladen</button><input ref={zipInput} type="file" accept=".zip,application/zip" aria-label="Brand-Story-ZIP" style={{display:'none'}} disabled={busy} onChange={event=>{if(event.target.files[0])importZip(event.target.files[0]);event.target.value='';}} /></>}{canManage && <button className="bs-primary" onClick={() => { setDraft({ data: newStory(), purpose: '' }); setDirty(false); setMessage(''); setImportNotice(''); }} disabled={busy}>+ Beispiel hinzufügen</button>}</div>
       {message && <p role="status">{message}</p>}{error && <p role="alert">{error}</p>}{loading && <p>Beispiele werden geladen …</p>}
       <div className="bs-reference-list">{[...custom.map(item => ({ ...item.data, example: item })), ...stories].map((story, index) => <article key={story.example?.id || 'builtin-' + index}>
         <header><h3>{story.brandName}</h3><span>{story.cards.length} Karten · {story.cards.filter(card => card.type === 'media').length} Full Image · {story.cards.filter(card => card.type === 'grid').length} Grids</span>

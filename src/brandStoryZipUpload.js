@@ -25,14 +25,14 @@ async function sheet(plan){
 }
 export async function importStoryZip(file,progress){
   progress('ZIP wird gelesen …');const plan=unpackStoryZip(new Uint8Array(await file.arrayBuffer())),images={};
-  const paths=[plan.desktop,plan.mobile,...plan.candidates.flatMap(card=>card.files)].filter(Boolean);
+  const paths=[...new Set([plan.desktop,plan.mobile,...plan.candidates.flatMap(card=>card.files)].filter(Boolean))];
   for(let index=0;index<paths.length;index++){
     progress(`Originalbilder werden hochgeladen · ${index+1}/${paths.length}`);
     const entry=plan.entries.find(entry=>entry.path===paths[index]);
     images[entry.path]=await uploadImage(new File([entry.bytes],entry.path.split('/').at(-1),{type:/\.png$/i.test(entry.path)?'image/png':'image/jpeg'}));
   }
   let analysis={},warning='';
-  if(plan.previews.length){
+  if(plan.manifestAnalysis){ analysis=plan.manifestAnalysis; }else if(plan.previews.length){
     try{
       progress('Kartenfolge und Grid-Überschriften werden aus den Vorschauen erkannt …');
       const ticket=await referenceAdminTicket('story-zip');
@@ -43,5 +43,5 @@ export async function importStoryZip(file,progress){
     }catch(error){warning='Die automatische Reihenfolge konnte nicht erkannt werden: '+error.message+' Bitte Reihenfolge und Grid-Überschriften ergänzen.';}
   }else warning='Keine Gesamtvorschauen gefunden. Bitte Reihenfolge und Grid-Überschriften ergänzen.';
   const story=storyFromZip(plan,images,analysis);
-  return {data:story,purpose:'',notice:[warning,'Die Originalbilder wurden übernommen. ASINs und Shop-Links werden aus Bildern nicht erraten. Bitte die Vorschau vor dem Speichern prüfen.'].filter(Boolean).join(' ')};
+  return {data:story,purpose:plan.purpose||'',notice:plan.manifestAnalysis?'Kartenfolge, Überschriften, ASINs und Links wurden aus der ZIP übernommen. Bitte die Vorschau vor dem Speichern prüfen.':[warning,'Die Originalbilder wurden übernommen. ASINs und Shop-Links werden aus Bildern nicht erraten. Bitte die Vorschau vor dem Speichern prüfen.'].filter(Boolean).join(' ')};
 }

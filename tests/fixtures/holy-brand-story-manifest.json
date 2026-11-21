@@ -1,0 +1,189 @@
+{
+  "format": "temoa-brand-story-example",
+  "version": 1,
+  "brandName": "HOLY",
+  "marketplace": "de",
+  "purpose": "Persönlicher Markeneinstieg, Erklärung der Getränkewelt und sechs Produktgrids. Originale Amazon-Brand-Story.",
+  "background": {
+    "desktop": "Background/desktop.jpg",
+    "mobile": null
+  },
+  "cards": [
+    {
+      "type": "media",
+      "file": "Brand Media Assets/media asset image 1.png"
+    },
+    {
+      "type": "media",
+      "file": "Brand Media Assets/media asset image 2.png"
+    },
+    {
+      "type": "grid",
+      "gridMode": "individual",
+      "headline": "HOLY Bestseller",
+      "shopUrl": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4?store_ref=storeRecs_dp_aplus",
+      "slots": [
+        {
+          "file": "ASIN Grids/ASIN image 1a.png",
+          "asin": "B0CPJM5Y59",
+          "url": "https://www.amazon.de/dp/B0CPJM5Y59"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 1b.png",
+          "asin": "B0CZ56R4R7",
+          "url": "https://www.amazon.de/dp/B0CZ56R4R7"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 1c.png",
+          "asin": "B0CKLHP414",
+          "url": "https://www.amazon.de/dp/B0CKLHP414"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 1d.png",
+          "asin": "B0FQCP2QZK",
+          "url": "https://www.amazon.de/dp/B0FQCP2QZK"
+        }
+      ]
+    },
+    {
+      "type": "grid",
+      "gridMode": "individual",
+      "headline": "HOLY Energy mit NewCaffⓇ",
+      "shopUrl": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4?store_ref=storeRecs_dp_aplus",
+      "slots": [
+        {
+          "file": "ASIN Grids/ASIN image 2a.png",
+          "asin": "B0CPJNY9RS",
+          "url": "https://www.amazon.de/dp/B0CPJNY9RS"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 2b.png",
+          "asin": "B0DCVR9NN1",
+          "url": "https://www.amazon.de/dp/B0DCVR9NN1"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 2c.png",
+          "asin": "B0DCKBQPSV",
+          "url": "https://www.amazon.de/dp/B0DCKBQPSV"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 2d.png",
+          "asin": "B0DCKDDJST",
+          "url": "https://www.amazon.de/dp/B0DCKDDJST"
+        }
+      ]
+    },
+    {
+      "type": "grid",
+      "gridMode": "individual",
+      "headline": "HOLY Hydration mit Elektrolyte",
+      "shopUrl": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4?store_ref=storeRecs_dp_aplus",
+      "slots": [
+        {
+          "file": "ASIN Grids/ASIN image 3a.png",
+          "asin": "B0CZ53JZDT",
+          "url": "https://www.amazon.de/dp/B0CZ53JZDT"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 3b.png",
+          "asin": "B0D9QJWBYM",
+          "url": "https://www.amazon.de/dp/B0D9QJWBYM"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 3c.png",
+          "asin": "B0F33VRJ9G",
+          "url": "https://www.amazon.de/dp/B0F33VRJ9G"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 3d.png",
+          "asin": "B0F2T8Z8D8",
+          "url": "https://www.amazon.de/dp/B0F2T8Z8D8"
+        }
+      ]
+    },
+    {
+      "type": "grid",
+      "gridMode": "individual",
+      "headline": "HOLY Iced Tea mit Botanicals",
+      "shopUrl": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4?store_ref=storeRecs_dp_aplus",
+      "slots": [
+        {
+          "file": "ASIN Grids/ASIN image 4a.png",
+          "asin": "B0F3NZSP4Q",
+          "url": "https://www.amazon.de/dp/B0F3NZSP4Q"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 4b.png",
+          "asin": "B0CKLFVMJG",
+          "url": "https://www.amazon.de/dp/B0CKLFVMJG"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 4c.png",
+          "asin": "B0F3NYQB8N",
+          "url": "https://www.amazon.de/dp/B0F3NYQB8N"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 4d.png",
+          "asin": "B0F3NHPVPW",
+          "url": "https://www.amazon.de/dp/B0F3NHPVPW"
+        }
+      ]
+    },
+    {
+      "type": "grid",
+      "gridMode": "individual",
+      "headline": "HOLY Milkshake - kalorienarm",
+      "shopUrl": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4?store_ref=storeRecs_dp_aplus",
+      "slots": [
+        {
+          "file": "ASIN Grids/ASIN image 5a.png",
+          "asin": "B0FQCMT45R",
+          "url": "https://www.amazon.de/dp/B0FQCMT45R"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 5b.png",
+          "asin": "B0FQCQGMBG",
+          "url": "https://www.amazon.de/dp/B0FQCQGMBG"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 5c.png",
+          "asin": "B0FS1VPZ7C",
+          "url": "https://www.amazon.de/dp/B0FS1VPZ7C"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 5d.png",
+          "asin": "B0FS1VNHYY",
+          "url": "https://www.amazon.de/dp/B0FS1VNHYY"
+        }
+      ]
+    },
+    {
+      "type": "grid",
+      "gridMode": "individual",
+      "headline": "Shaker Bestseller",
+      "shopUrl": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4?store_ref=storeRecs_dp_aplus",
+      "slots": [
+        {
+          "file": "ASIN Grids/ASIN image 6a.png",
+          "asin": "B0DD4C43D1",
+          "url": "https://www.amazon.de/dp/B0DD4C43D1"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 6b.png",
+          "asin": "B0DWXRL7SD",
+          "url": "https://www.amazon.de/dp/B0DWXRL7SD"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 6c.png",
+          "asin": "B0DWXT4HLM",
+          "url": "https://www.amazon.de/dp/B0DWXT4HLM"
+        },
+        {
+          "file": "ASIN Grids/ASIN image 6d.png",
+          "asin": "B0H34SFYL6",
+          "url": "https://www.amazon.de/dp/B0H34SFYL6"
+        }
+      ]
+    }
+  ]
+}
