@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { newStory, newCard } from '../../src/brandStoryModel.mjs';
 const pixel = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aX1cAAAAASUVORK5CYII=', 'base64');
-async function setup(page, designer = false) {
+async function setup(page, designer = false, failFirstSave = true) {
   let examples = [];
-  let failSaveOnce = true;
+  let failSaveOnce = failFirstSave;
   await page.route('**/api/brand-story-examples', async route => {
     if (route.request().method() === 'GET') return route.fulfill({ json: { examples } });
     if (failSaveOnce) { failSaveOnce = false; return route.fulfill({ status: 503, json: { error: 'Speichern fehlgeschlagen. Bitte erneut versuchen.' } }); }
@@ -85,12 +85,30 @@ test('HOLY ZIP is available from overview and imports exact artwork assignments 
   await expect(page.getByLabel('Marke',{exact:true})).toHaveValue('HOLY');
   await expect(editor.locator('.bs-example-card')).toHaveCount(8);
   expect(visionRequests).toBe(0);
-  await page.getByRole('button',{name:'Beispiel speichern',exact:true}).click();
-  await expect(editor.getByRole('alert').filter({hasText:'Speichern fehlgeschlagen'})).toContainText('Speichern fehlgeschlagen');
+  await expect(page.getByRole('alert').filter({hasText:'Speichern fehlgeschlagen'})).toContainText('Speichern fehlgeschlagen');
+  await expect(page.getByRole('status').filter({hasText:'noch nicht gespeichert'})).toBeVisible();
   await page.getByRole('button',{name:'Beispiel speichern',exact:true}).click();
   await expect(page.getByRole('status')).toContainText('Beispiel gespeichert');
   const saved=records()[0].data;
   expect(saved.cards.filter(c=>c.type==='grid').map(c=>c.headline)).toEqual(manifest.cards.filter(c=>c.type==='grid').map(c=>c.headline));
   expect(saved.cards.flatMap(c=>c.slots.map(s=>s.asin))).toEqual(manifest.cards.flatMap(c=>(c.slots||[]).map(s=>s.asin)));
   expect(saved.cards[2].shopUrl).toBe(manifest.cards[2].shopUrl);
+});
+
+test('valid ZIP shows saving feedback, saves automatically and is present after reloading',async({page})=>{
+ const {zipSync,strToU8}=await import('fflate');
+ const manifest={format:'temoa-brand-story-example',version:1,brandName:'Automatisch gespeichert',background:{desktop:'Background/desktop.png'},cards:[{type:'media',file:'Brand Media Assets/media asset image 1.png'}]};
+ const bytes=Buffer.from(zipSync({'brand-story.json':strToU8(JSON.stringify(manifest)),'Background/desktop.png':pixel,'Brand Media Assets/media asset image 1.png':pixel}));
+ const records=await setup(page,false,false);
+ let release;const gate=new Promise(resolve=>release=resolve);
+ await page.route('**/api/brand-story-examples',async route=>{if(route.request().method()==='POST')await gate;return route.fallback();});
+ await page.getByLabel('Brand-Story-ZIP',{exact:true}).setInputFiles({name:'example.zip',mimeType:'application/zip',buffer:bytes});
+ await expect(page.getByRole('status').filter({hasText:'Beispiel wird gespeichert'})).toBeVisible();
+ expect(records()).toHaveLength(0);
+ release();
+ await expect(page.getByRole('status').filter({hasText:'hochgeladen und gespeichert'})).toBeVisible();
+ expect(records()).toHaveLength(1);
+ await expect(page.locator('.bs-example-editor')).toHaveCount(0);
+ await page.reload();await page.getByRole('button',{name:'Beispiele',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'Automatisch gespeichert',exact:true})).toBeVisible();
 });

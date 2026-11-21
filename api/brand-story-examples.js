@@ -26,8 +26,14 @@ module.exports = async (req, res) => {
       if (!result.rowsAffected) return res.status(409).json({ error: 'Das Beispiel wurde inzwischen geändert. Bitte neu laden.' });
       return res.json({ id: body.id, revision: body.revision + 1 });
     }
-    const id = randomUUID();
-    await db.execute({ sql: 'INSERT INTO brand_story_examples(id,data,purpose) VALUES(?,?,?)', args: [id, data, body.purpose.trim()] });
+    if(body.createId!==undefined && (typeof body.createId!=='string'||! /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(body.createId)))throw Error('Ungültige Upload-Kennung.');
+    const id = body.createId || randomUUID();
+    const inserted=await db.execute({ sql: 'INSERT INTO brand_story_examples(id,data,purpose) VALUES(?,?,?) ON CONFLICT(id) DO NOTHING', args: [id, data, body.purpose.trim()] });
+    if(!inserted.rowsAffected){
+      const existing=(await db.execute({sql:'SELECT data,purpose,revision FROM brand_story_examples WHERE id=?',args:[id]})).rows[0];
+      if(!existing || existing.data!==data || existing.purpose!==body.purpose.trim())return res.status(409).json({error:'Dieser Upload wurde bereits gespeichert und inzwischen geändert. Bitte das gespeicherte Beispiel erneut öffnen.'});
+      return res.json({id,revision:Number(existing.revision)});
+    }
     return res.json({ id, revision: 1 });
   } catch (error) { return res.status(400).json({ error: error.message }); }
 };

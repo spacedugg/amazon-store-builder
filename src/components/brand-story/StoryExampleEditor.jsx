@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { newCard } from '../../brandStoryModel.mjs';
-import { exampleData } from '../../brandStoryExamples.mjs';
+import { saveStoryExample } from '../../brandStoryExampleSave';
 import { uploadImage } from '../../brandStoryImageUpload';
 import { Asset, Field } from './StoryElements';
 import { StoryCarousel } from './StoryCarousel';
@@ -45,11 +45,8 @@ export default function StoryExampleEditor({ draft, onChange, onSaved, busy, set
   async function save() {
     setError(''); setBusy(true);
     try {
-      const data = exampleData(story);
-      const response = await fetch('/api/brand-story-examples', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...draft, data }) });
-      const result = await response.json();
-      if (!response.ok) throw Error(result.error || 'Beispiel konnte nicht gespeichert werden.');
-      onSaved({ ...draft, ...result, data });
+      const result=await saveStoryExample(draft);
+      onSaved(result);
     } catch (e) { setError(e.message); }
     finally { setBusy(false); }
   }

@@ -57,5 +57,12 @@ test('custom examples persist separately, expose artwork only and reject stale r
     assert.equal((await request('GET')).body.examples[0].purpose, 'Geändert');
     assert.equal((await request('POST', { data: { ...data, cards: [] }, purpose: '' })).code, 400);
     assert.equal((await request('DELETE')).code, 405);
+    const createId='11111111-1111-4111-8111-111111111111';
+    const upload={data,purpose:'ZIP import',createId};
+    assert.equal((await request('POST',upload)).body.id,createId);
+    assert.equal((await request('POST',upload)).body.revision,1);
+    assert.equal((await request('GET')).body.examples.filter(row=>row.id===createId).length,1);
+    assert.equal((await request('POST',{...upload,purpose:'Changed replay'})).code,409);
+
   } finally { db.close(); if (previous) require.cache[dbPath] = previous; else delete require.cache[dbPath]; delete require.cache[handlerPath]; }
 });
