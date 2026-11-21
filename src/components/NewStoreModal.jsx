@@ -1,6 +1,6 @@
 import { DesignDirectionFields } from './DesignDirection';
 import { designDirectionData, designReferenceError } from '../designDirection.mjs';
-import { buildStorefrontConceptPrompt } from '../storefrontConceptPrompt';
+import { buildMacroStyleConceptPrompt } from '../storefrontConceptPrompt';
 import { useState, useRef } from 'react';
 import { STOREFRONT_ASIN_PROMPT } from '../storefrontAsinPrompt';
 
@@ -14,7 +14,7 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
   var [choice, setChoice] = useState(initialReferences.length ? true : null);
   var referenceError = choice === true ? designReferenceError(references) : '';
   var directionReady = choice !== null && !referenceError && (choice === false || references.some(row => row.url.trim()));
-  var conceptPrompt = referenceError ? '' : buildStorefrontConceptPrompt([]);
+  var conceptPrompt = referenceError ? '' : buildMacroStyleConceptPrompt(choice === true ? references : []);
 
   var fileRef = useRef(null);
 
@@ -82,7 +82,7 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
         <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 6, padding: 12, marginBottom: 14 }}>
           <div style={{ fontWeight: 700, marginBottom: 6, color: '#0369a1', fontSize: 13 }}>Schritt 2: Konzept in Claude erstellen</div>
           <div style={{ fontSize: 12, lineHeight: 1.5, color: '#334155', marginBottom: 8 }}>
-            Öffne einen neuen Claude-Chat mit dem installierten Skill <code>amazon-storefront-design</code>. Kopiere den Auftrag und gib deine ASIN-Liste dazu. Der Skill enthält die kuratierte Wissensbasis. Die Designrichtung wird separat für den Designer gespeichert.
+            Öffne einen neuen Claude-Chat mit dem installierten Skill <code>amazon-storefront-design</code>. Kopiere den Auftrag und gib deine ASIN-Liste dazu. Der Skill enthält die kuratierte Wissensbasis. Die gewählte Designrichtung fließt in den Claude-Auftrag, das Konzept und das Designer-Briefing ein. Die eigene Markenidentität bleibt maßgeblich.
             {' '}<a href="/brand-store-claude/amazon-storefront-design.zip" download>Aktualisierten Skill herunterladen</a>
           </div>
 

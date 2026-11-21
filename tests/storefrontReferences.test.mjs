@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 const source = await readFile(new URL('../src/storefrontConceptPrompt.js', import.meta.url), 'utf8');
-const { buildStorefrontConceptPrompt, validateStorefrontReferences, STOREFRONT_CONCEPT_PROMPT } = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+const { buildStorefrontConceptPrompt, validateStorefrontReferences, buildMacroStyleConceptPrompt, MACRO_STYLE_RULES, STOREFRONT_CONCEPT_PROMPT } = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
 
 test('empty optional references preserve the existing creation workflow', () => {
   assert.equal(buildStorefrontConceptPrompt([{ url: '', notes: '' }]), STOREFRONT_CONCEPT_PROMPT);
@@ -26,4 +26,13 @@ test('invalid links and orphaned notes cannot be silently omitted from the assig
   }
   assert.match(validateStorefrontReferences([{ url: '', notes: 'Bildfolge übernehmen' }]), /Link ergänzen/);
   assert.equal(validateStorefrontReferences([{ url: 'https://www.amazon.com/stores/page/123' }]), '');
+});
+
+test('macro style assignment carries project references without copying brand identity or assortment counts', () => {
+  const prompt = buildMacroStyleConceptPrompt([{url:' https://example.com/style ',notes:' Bildstark mit Tiefe '}]);
+  assert.ok(prompt.includes('"url": "https://example.com/style"'));
+  assert.ok(prompt.includes('"notes": "Bildstark mit Tiefe"'));
+  for (const rule of ['Corporate Identity', 'keine Zielvorgabe', 'Homepage belegt keine Unterseitenstruktur', 'englischen brief', 'zwei sinnvoll unterschiedliche Architekturansätze']) assert.ok(MACRO_STYLE_RULES.includes(rule), rule);
+  assert.equal(buildMacroStyleConceptPrompt([]), STOREFRONT_CONCEPT_PROMPT);
+  for (const url of ['javascript:alert(1)', 'https://user:pass@example.com/style', 'kein Link', '']) assert.throws(() => buildMacroStyleConceptPrompt([{url,notes:'Tiefe'}]));
 });
