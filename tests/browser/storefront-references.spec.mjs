@@ -12,12 +12,12 @@ for (const width of [1440, 390]) {
     await expect(page.getByRole('button', { name: 'Stattdessen leeren Store starten' })).toBeDisabled();
     await page.getByLabel('Stilreferenzen auswählen', { exact: true }).check();
     await page.getByLabel('Referenz-Link 1', { exact: true }).fill('https://example.com/style');
-    await page.getByLabel('Designhinweis 1 (für den Designer)').fill('Warm colours and large lifestyle imagery');
+    await page.getByLabel('Stilhinweis 1').fill('Warm colours and large lifestyle imagery');
     await page.getByLabel('Briefing JSON', { exact: true }).fill(JSON.stringify({ brandName: 'Style Test', pages: [{ name: 'Home', sections: [] }] }));
     await page.getByRole('button', { name: 'Importieren', exact: true }).click();
     await page.getByRole('button', { name: 'Designrichtung (1)', exact: true }).click();
     await expect(page.getByLabel('Referenz-Link 1', { exact: true })).toHaveValue('https://example.com/style');
-    await expect(page.getByLabel('Designhinweis 1 (für den Designer)')).toHaveValue('Warm colours and large lifestyle imagery');
+    await expect(page.getByLabel('Stilhinweis 1')).toHaveValue('Warm colours and large lifestyle imagery');
     await page.getByLabel('Referenz-Link 1', { exact: true }).fill('https://example.com/updated');
     await page.getByRole('button', { name: 'Übernehmen', exact: true }).click();
     await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('amazon-store-builder-autosave') || '{}').designReferences?.[0]?.url)).toBe('https://example.com/updated');
