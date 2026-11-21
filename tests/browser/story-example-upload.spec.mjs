@@ -8,8 +8,8 @@ async function setup(page, designer = false, failFirstSave = true) {
     if (route.request().method() === 'GET') return route.fulfill({ json: { examples } });
     if (failSaveOnce) { failSaveOnce = false; return route.fulfill({ status: 503, json: { error: 'Speichern fehlgeschlagen. Bitte erneut versuchen.' } }); }
     const input = route.request().postDataJSON();
-    const record = { ...input, id: 'custom-example', revision: (input.revision || 0) + 1 };
-    examples = [record];
+    const record = { ...input, id: input.createId || 'custom-example', revision: (input.revision || 0) + 1 };
+    examples = [record,...examples.filter(item=>item.id!==record.id)];
     return route.fulfill({ json: { id: record.id, revision: record.revision } });
   });
   const data = newStory('Designer-Projekt'); data.cards = [newCard('media')];
@@ -135,4 +135,25 @@ test('the original nested HOLY extraction ZIP imports, saves and survives reload
  if(process.env.HOLY_TEST_ZIP){expect(saved.background.desktop.width).toBe(1464);expect(saved.cards[0].image.width).toBe(1448);}
  await page.reload();await page.getByRole('button',{name:'Beispiele',exact:true}).click();
  await expect(page.locator('.bs-reference-list').getByRole('heading',{name:'HOLY',exact:true})).toBeVisible();
+});
+
+test('a three-story collection imports with one upload and resumes a partial save without duplicating examples',async({page})=>{
+ test.setTimeout(120000);
+ const {zipSync,strToU8}=await import('fflate');const {readFileSync}=await import('node:fs');
+ const brands=process.env.STORY_COLLECTION_ZIP?['hellotaste','SNOCKS','rainfactory']:['First','Second','Third'];
+ const nested={};
+ for(const brand of brands){const manifest={format:'temoa-brand-story-example',version:1,brandName:brand,background:{desktop:'Background/desktop.png'},cards:[{type:'media',file:'Brand Media Assets/card.png'}]};nested[brand+'.zip']=zipSync({'brand-story.json':strToU8(JSON.stringify(manifest)),'Background/desktop.png':pixel,'Brand Media Assets/card.png':pixel});}
+ const buffer=process.env.STORY_COLLECTION_ZIP?readFileSync(process.env.STORY_COLLECTION_ZIP):Buffer.from(zipSync(nested));
+ const records=await setup(page,false,false);let calls=0;
+ await page.route('**/api/brand-story-examples',async route=>{if(route.request().method()==='POST'&&++calls===2)return route.fulfill({status:503,json:{error:'Temporärer Speicherfehler'}});return route.fallback();});
+ await page.getByLabel('Brand-Story-ZIP',{exact:true}).setInputFiles({name:'Brand-Story-Beispiele.zip',mimeType:'application/zip',buffer});
+ await expect(page.getByRole('button',{name:'Import fortsetzen',exact:true})).toBeVisible({timeout:90000});
+ expect(records()).toHaveLength(1);
+ await page.getByRole('button',{name:'Import fortsetzen',exact:true}).click();
+ await expect(page.getByRole('status').filter({hasText:'hochgeladen und gespeichert'})).toBeVisible();
+ expect(records()).toHaveLength(3);expect(new Set(records().map(row=>row.id)).size).toBe(3);
+ expect(records().map(row=>row.data.brandName).sort()).toEqual([...brands].sort());
+ if(process.env.STORY_COLLECTION_ZIP){expect(records().map(row=>row.data.cards.length).sort((a,b)=>a-b)).toEqual([7,9,10]);expect(records().flatMap(row=>row.data.cards.flatMap(card=>card.slots.map(slot=>slot.asin)))).toHaveLength(28);}
+ await page.reload();await page.getByRole('button',{name:'Beispiele',exact:true}).click();
+ for(const brand of brands)await expect(page.locator('.bs-reference-list').getByRole('heading',{name:brand,exact:true})).toBeVisible();
 });
