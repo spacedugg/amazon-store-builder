@@ -65,7 +65,7 @@ async function settlePage(page, options={}) {
     while (true) {
       if (Date.now()>deadline) throw Error('Nicht alle Homepage-Bilder wurden rechtzeitig geladen. Die alte Aufnahme wurde nicht ersetzt.');
       const state=await page.evaluate(pageReadiness,options.selector);
-      if (state.height>60000) throw Error('Die Homepage überschreitet die sichere Aufnahmehöhe.');
+      if (state.height>200000) throw Error('Die Homepage überschreitet die sichere Aufnahmehöhe.');
       await page.evaluate(y=>window.scrollTo(0,y),position);
       await pause(250);
       if (position>=state.height) break;
