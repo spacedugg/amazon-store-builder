@@ -12,7 +12,7 @@ export function referenceKey(url) {
 export function mergeReferenceCatalog(catalog, additions = []) {
   const rows = new Map();
   for (const row of [...catalog, ...additions]) {
-    if (!row || !referenceKey(row.storeUrl) || ['amazon.de:91172724-C342-482B-A300-564D9EA5E09F','amazon.de:1758941C-AE87-4628-AB45-62C0A2BDB75C','product:B0CLDWHKCB'].includes(referenceKey(row.storeUrl))) continue;
+    if (!row || !referenceKey(row.storeUrl) || ['amazon.de:91172724-C342-482B-A300-564D9EA5E09F','amazon.de:1758941C-AE87-4628-AB45-62C0A2BDB75C','product:B0CLDWHKCB','amazon.de:A096FF51-79D5-440D-8789-6255E9DFE87D','amazon.de:30552E59-AC22-47B1-BBBB-AEA9225BD614','amazon.de:3EB222DB-B679-4317-BFB8-B3F87C7A3E9A'].includes(referenceKey(row.storeUrl))) continue;
     const key = referenceKey(row.storeUrl);
     if (rows.has(key) && row.captureStatus) { const current=rows.get(key); rows.set(key, { ...current, brandName: row.brandName || current.brandName, alternativeUrls: [...new Set([...(current.alternativeUrls || []),...(row.alternativeUrls || [])])], homepageScreenshot: row.homepageScreenshot || current.homepageScreenshot, captureStatus: row.captureStatus, captureError: row.captureError }); }
     if (!rows.has(key)) rows.set(key, { ...row, id: key, kind: key.startsWith('product:') ? 'product' : 'store', images: row.images || [], modules: row.modules || [] });

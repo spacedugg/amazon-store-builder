@@ -956,44 +956,6 @@
     "images": []
   },
   {
-    "id": "nucompany",
-    "brandName": "the nu company",
-    "storeUrl": "https://www.amazon.de/stores/thenucompany/page/A096FF51-79D5-440D-8789-6255E9DFE87D",
-    "category": "food",
-    "kind": "store",
-    "source": "existing",
-    "analyzedAt": "2026-05-13",
-    "modules": [
-      {
-        "name": "Hero Lifestyle drei Freundinnen",
-        "layout": "hero_banner_tall",
-        "tiles": 1
-      },
-      {
-        "name": "Brand Story Text plus Produkt-Stillleben",
-        "layout": "editorial_banner_large",
-        "tiles": 2
-      },
-      {
-        "name": "Brand Manifesto plus Produkt-Visual",
-        "layout": "editorial_banner_large",
-        "tiles": 2
-      },
-      {
-        "name": "Brand Statement Hero Riegel sind da um sie zu brechen",
-        "layout": "hero_banner_tall",
-        "tiles": 1
-      },
-      {
-        "name": "Schokosnacks Tile-Pair Almonds plus Crunchy",
-        "layout": "editorial_tile_pair",
-        "tiles": 2
-      }
-    ],
-    "summary": "",
-    "images": []
-  },
-  {
     "id": "klosterkitchen",
     "brandName": "Kloster Kitchen",
     "storeUrl": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620",
@@ -1103,59 +1065,6 @@
         "name": "Matratzen Section Intro",
         "layout": "editorial_section_intro",
         "tiles": 1
-      }
-    ],
-    "summary": "",
-    "images": []
-  },
-  {
-    "id": "trixie",
-    "brandName": "TRIXIE",
-    "storeUrl": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614",
-    "category": "pets",
-    "kind": "store",
-    "source": "existing",
-    "analyzedAt": "2026-05-23",
-    "modules": [
-      {
-        "name": "Video-Hero",
-        "layout": "hero_banner_video",
-        "tiles": 1
-      },
-      {
-        "name": "Tile-Pair Section-Trenner Brand-Statement",
-        "layout": "editorial_tile_pair",
-        "tiles": 2
-      },
-      {
-        "name": "HUND Section-Hero 5-fach Verteiler",
-        "layout": "section_hero_5tile_distributor",
-        "tiles": 5
-      },
-      {
-        "name": "HUND Tile-Row 4-fach Sub-Verteiler",
-        "layout": "editorial_tile_quad",
-        "tiles": 4
-      },
-      {
-        "name": "Neuheiten Tile-Pair-Banner Marken-Statement",
-        "layout": "editorial_tile_pair",
-        "tiles": 2
-      },
-      {
-        "name": "KATZE Section-Hero 5-fach Verteiler",
-        "layout": "section_hero_5tile_distributor",
-        "tiles": 5
-      },
-      {
-        "name": "KATZE Tile-Row 4-fach Sub-Verteiler",
-        "layout": "editorial_tile_quad",
-        "tiles": 4
-      },
-      {
-        "name": "Closing Tile-Pair Brand-Statement",
-        "layout": "editorial_tile_pair",
-        "tiles": 2
       }
     ],
     "summary": "",
@@ -1360,15 +1269,6 @@
     "storeUrl": "https://www.amazon.de/stores/HSHOP-SPORT/page/8B640FD7-98E9-4C48-9BF0-422ED3F14A3A",
     "kind": "store",
     "category": "fitness",
-    "source": "provided",
-    "nameVerified": true
-  },
-  {
-    "id": "tierliebhaber",
-    "brandName": "TIERLIEBHABER",
-    "storeUrl": "https://www.amazon.de/stores/TIERLIEBHABER/page/3EB222DB-B679-4317-BFB8-B3F87C7A3E9A",
-    "kind": "store",
-    "category": "pets",
     "source": "provided",
     "nameVerified": true
   },
