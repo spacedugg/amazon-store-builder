@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@libsql/client": "^0.17.0",
+    "@sparticuz/chromium": "^141.0.0",
     "@vercel/blob": "^1.1.0",
     "docx": "^9.5.3",
     "fflate": "^0.8.3",
+    "playwright-core": "^1.56.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
