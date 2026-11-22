@@ -34,11 +34,15 @@ export function DesignDirectionDialog({ store, onSave, onClose }) {
 }
 export function DesignerDesignDirection({ store }) {
   const rows = normaliseDesignReferences(store.designReferences).filter(row => row.url && !designReferenceError([row]));
-  if (!rows.length) return null;
+  const brandNotes = typeof store.manualCI?.notes === 'string' ? store.manualCI.notes.trim() : '';
+  const productNotes = typeof store.productCI?.designerNotes === 'string' ? store.productCI.designerNotes.trim() : '';
+  if (!rows.length && !brandNotes && !productNotes) return null;
   return <section aria-label="Design direction" style={{ margin: '16px 24px', padding: 18, border: '2px solid #60a5fa', borderRadius: 10, background: '#eff6ff', color: '#0f172a' }}>
     <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>Design direction</h2>
     <p>Use these references for macro style: visual density, imagery, text hierarchy, composition and page rhythm. Preserve this brand’s corporate identity; do not automatically copy reference colours, typography or icons. Product counts and page scope follow this brand’s assortment. Apply the concrete image type, grouping, depth and mobile composition specified in each module brief; create original assets for this brand.</p>
     {rows.map((row, i) => <div key={i} style={{ marginTop: 12, overflowWrap: 'anywhere' }}><a href={row.url} target="_blank" rel="noopener noreferrer">{row.url}</a>{row.notes && <p style={{ whiteSpace: 'pre-wrap', margin: '4px 0' }}>{row.notes}</p>}</div>)}
+    {brandNotes && <div style={{ marginTop: 16 }}><h3 style={{ margin: '0 0 6px', fontSize: 16 }}>Brand-specific designer notes</h3><p style={{ whiteSpace: 'pre-wrap', margin: 0 }}>{brandNotes}</p></div>}
+    {productNotes && <div style={{ marginTop: 16 }}><h3 style={{ margin: '0 0 6px', fontSize: 16 }}>Product imagery notes</h3><p style={{ whiteSpace: 'pre-wrap', margin: 0 }}>{productNotes}</p></div>}
   </section>;
 }
 

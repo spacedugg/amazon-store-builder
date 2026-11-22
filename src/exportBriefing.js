@@ -404,11 +404,25 @@ export async function generateBriefingDocx(store, briefingLang) {
 
   if (store.designReferences?.length) {
     children.push(heading('Design direction', HeadingLevel.HEADING_1));
-    children.push(boldPara('Visual style: ', 'Imagery, colours, typography and overall feel.'));
+    children.push(boldPara('Visual style: ', 'Use references for macro style: visual density, imagery, text hierarchy, composition and page rhythm. Preserve this brand’s corporate identity; do not automatically copy reference colours, typography or icons.'));
     store.designReferences.forEach(function(reference) {
       children.push(boldPara('Reference: ', reference.url));
       if (reference.notes) children.push(boldPara('Design notes: ', reference.notes));
     });
+    children.push(divider());
+  }
+
+  var brandNotes = typeof store.manualCI?.notes === 'string' ? store.manualCI.notes.trim() : '';
+  var productNotes = typeof store.productCI?.designerNotes === 'string' ? store.productCI.designerNotes.trim() : '';
+  if (brandNotes || productNotes) {
+    if (brandNotes) {
+      children.push(heading('Brand-specific designer notes', HeadingLevel.HEADING_2));
+      children.push(new Paragraph({ children: multilineRuns(brandNotes, { size: 22 }) }));
+    }
+    if (productNotes) {
+      children.push(heading('Product imagery notes', HeadingLevel.HEADING_2));
+      children.push(new Paragraph({ children: multilineRuns(productNotes, { size: 22 }) }));
+    }
     children.push(divider());
   }
 

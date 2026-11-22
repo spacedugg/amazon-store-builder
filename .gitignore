@@ -19,3 +19,5 @@ playwright-report/
 
 # Generated portable Brand Store Claude package
 public/brand-store-claude/amazon-storefront-design.zip
+
+/audit-work/

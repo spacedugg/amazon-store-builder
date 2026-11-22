@@ -27,7 +27,10 @@ test('current navigation inventory covers the active catalogue while distinguish
 test('bundled macro profiles cover every active reference and keep homepage and representative subpage evidence separate',async()=>{
  const catalog=JSON.parse(await readFile(new URL('../src/data/storeReferenceCatalog.json',import.meta.url),'utf8'));
  const profiles=JSON.parse(await readFile(new URL('../data/store-knowledge/_reference_style_profiles.json',import.meta.url),'utf8'));
- assert.equal(profiles.schemaVersion,2);
+ assert.equal(profiles.schemaVersion,3);
+ assert.equal(profiles.fullPageAudit.coverageCompleted,true);
+ assert.equal(profiles.fullPageAudit.discoveredPages,525);
+ assert.equal(profiles.fullPageAudit.unreviewedCapturedPages,0);
  assert.equal(profiles.subpageReview.visuallyReviewedPages,54);
  assert.equal(profiles.stores.reduce((sum,row)=>sum+row.subpagePatterns.length,0),54);
  assert.equal(profiles.stores.reduce((sum,row)=>sum+row.unavailableSubpages.length,0),1);
@@ -36,7 +39,7 @@ test('bundled macro profiles cover every active reference and keep homepage and 
  assert.deepEqual(profiles.stores.map(r=>r.id).sort(),catalog.map(r=>r.id).sort());
  for(const row of profiles.stores){
   assert.equal(row.coverage.homepage,'visually_reviewed');
-  assert.equal(row.coverage.subpages,'representative_pages_visually_reviewed');
+  assert.equal(row.coverage.subpages,'all_discovered_pages_audited');
   assert.equal(row.coverage.allNavigationEntriesVisuallyReviewed,false);
   assert.equal(row.coverage.visuallyReviewedSubpageCount,row.subpagePatterns.length);
   assert.equal(row.coverage.selectedUnavailableSubpageCount,row.unavailableSubpages.length);

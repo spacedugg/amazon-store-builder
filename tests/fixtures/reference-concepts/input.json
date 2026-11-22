@@ -1,0 +1,60 @@
+{
+  "brandName": "True Nature",
+  "marketplace": "de",
+  "category": "supplements",
+  "brandTone": "Modern, direkt, nahbar, locker, duzen. Familienunternehmen aus Köln, ehrlich und bodenständig, ohne Marketing Floskeln. Klar, freundlich, selbstbewusst, glaubwürdig, nicht steril medizinisch.",
+  "brandStory": "True Nature ist ein Familienunternehmen aus Köln, gegründet 2019 von Lukas und Samuel Peto. Wir bauen hochwirksame Rezepturen aus natürlichen Inhaltsstoffen, kombiniert mit moderner Wissenschaft und strengen Qualitätsstandards. Made in Germany, unabhängig geprüft, große Dosen zum fairen Preis.",
+  "pageNames": [
+    "Home",
+    "Schlaf",
+    "Energie",
+    "Über uns"
+  ],
+  "asins": [
+    {
+      "asin": "B0FY73CZM8",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B0DN1NTRZC",
+      "category": "Energie"
+    },
+    {
+      "asin": "B088TT7J1G",
+      "category": "Energie"
+    },
+    {
+      "asin": "B089YWB481",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B0DPN4LF94",
+      "category": "Energie"
+    },
+    {
+      "asin": "B0CLD91XC9",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B0DBLPCNHC",
+      "category": "Energie"
+    },
+    {
+      "asin": "B0D496GM3H",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B0DYK2148G",
+      "category": "Schlaf"
+    }
+  ],
+  "manualCI": {
+    "notes": "Use True Nature’s own corporate identity: deep green #003e2a, warm cream #f8f7f0, pale green #d9fab3. Original packaging and logo stay unchanged. Style references affect composition, image dominance and hierarchy, not their brand colours or typography."
+  },
+  "productCI": {
+    "designerNotes": "Use supplied original product photos. If a rendering is proposed, label it as a production task; never imply an existing rendering asset. Keep claims within the supplied brand facts."
+  },
+  "choices": {
+    "scope": "Exactly the four confirmed pages. No Sale, product selector or extra pages. Category ASIN mapping stays unchanged. All structure and copy choices are delegated. No further questions."
+  }
+}
