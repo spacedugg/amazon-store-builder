@@ -1,6 +1,14 @@
 import { normaliseDesignReferences } from './designDirection.mjs';
 import { uid, emptyTile, emptyTileForLayout, emptyTextOverlay, deriveMobileDims } from './constants';
 
+// Keep project-wide designer instructions independent from mutable import data.
+function cloneDesignerContext(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
+  var prototype = Object.getPrototypeOf(value);
+  if (prototype !== Object.prototype && prototype !== null) return undefined;
+  return JSON.parse(JSON.stringify(value));
+}
+
 // Hilfsfunktion: Tile aus Briefing Dict normalisieren (Default Felder ergänzen,
 // Dimensions ableiten, linkUrl Page Refs auflösen). Kann sowohl beim Full
 // Briefing Import als auch beim Patch Apply genutzt werden.
@@ -122,6 +130,8 @@ export function importBriefingToStore(briefing) {
     category: data.category || 'generic',
     brandTone: data.brandTone || '',
     brandStory: data.brandStory || '',
+    manualCI: cloneDesignerContext(data.manualCI),
+    productCI: cloneDesignerContext(data.productCI),
     headerBanner: null,
     headerBannerMobile: null,
     headerBannerColor: data.headerBannerColor || '',

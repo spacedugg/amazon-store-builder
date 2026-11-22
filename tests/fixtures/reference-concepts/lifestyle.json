@@ -1,0 +1,523 @@
+{
+  "brandName": "True Nature",
+  "marketplace": "de",
+  "category": "supplements",
+  "brandTone": "Modern, direkt, nahbar, locker, duzen. Familienunternehmen aus Köln, ehrlich und bodenständig, ohne Marketing Floskeln. Klar, freundlich, selbstbewusst, glaubwürdig, nicht steril medizinisch.",
+  "brandStory": "True Nature ist ein Familienunternehmen aus Köln, gegründet 2019 von Lukas und Samuel Peto. Wir bauen hochwirksame Rezepturen aus natürlichen Inhaltsstoffen, kombiniert mit moderner Wissenschaft und strengen Qualitätsstandards. Made in Germany, unabhängig geprüft, große Dosen zum fairen Preis.",
+  "asins": [
+    {
+      "asin": "B0FY73CZM8",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B0DN1NTRZC",
+      "category": "Energie"
+    },
+    {
+      "asin": "B088TT7J1G",
+      "category": "Energie"
+    },
+    {
+      "asin": "B089YWB481",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B0DPN4LF94",
+      "category": "Energie"
+    },
+    {
+      "asin": "B0CLD91XC9",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B0DBLPCNHC",
+      "category": "Energie"
+    },
+    {
+      "asin": "B0D496GM3H",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B0DYK2148G",
+      "category": "Schlaf"
+    }
+  ],
+  "manualCI": {
+    "notes": "Use True Nature’s own corporate identity: deep green #003e2a, warm cream #f8f7f0, pale green #d9fab3. Original packaging and logo stay unchanged. Style references affect composition, image dominance and hierarchy, not their brand colours or typography."
+  },
+  "productCI": {
+    "designerNotes": "Use supplied original product photos. If a rendering is proposed, label it as a production task; never imply an existing rendering asset. Keep claims within the supplied brand facts."
+  },
+  "headerBannerColor": "#003e2a",
+  "designDirectionReviewed": true,
+  "designReferences": [
+    {
+      "url": "https://www.amazon.de/stores/HSHOP-SPORT/page/8B640FD7-98E9-4C48-9BF0-422ED3F14A3A",
+      "notes": "Lifestyle-led macro style: compact cut-in category labels, selective depth inside original image assets, and alternation between immersive scenes and quiet product selection. Preserve True Nature corporate identity. Apply the simpler leaf-page pattern where comparison is the task."
+    }
+  ],
+  "pages": [
+    {
+      "name": "Home",
+      "heroBannerBrief": "Shared True Nature brand masthead using the supplied original logo, deep green #003e2a and warm cream #f8f7f0. Keep the logo small and clear; do not borrow the reference store typography. Recompose the brand lockup for the taller mobile header. This header sits above navigation and is separate from the content images below.",
+      "heroBannerTextOverlay": "TRUE NATURE",
+      "heroBannerDimensions": {
+        "w": 3000,
+        "h": 600
+      },
+      "heroBannerMobileDimensions": {
+        "w": 1680,
+        "h": 900
+      },
+      "sections": [
+        {
+          "module": "navigation.lifestylePair",
+          "layoutId": "std-2equal",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Schlaf",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Compact category entry photograph: an adult setting a book on a bedside table in a calm evening room, no visible supplement package. Integrate the short category label into a warm cream cut-in at the upper left, as if the page ground enters the photo. Keep the scene dominant and the label bold but compact. Use True Nature deep green lettering; no reference brand colours or icons. This quiet entry precedes a larger, more immersive scene. Mobile: retain a square crop, enlarge the label relative to the scene and keep the full white cut-in inside the safe area.",
+              "dimensions": {
+                "w": 1500,
+                "h": 1500
+              },
+              "mobileDimensions": {
+                "w": 750,
+                "h": 750
+              },
+              "linkUrl": "page:Schlaf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Energie",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Matching compact category photograph: an adult opening curtains in natural morning light, no visible supplement package. Integrate the label into a warm cream upper-left cut-in matching the neighbouring Schlaf tile. Echo the paired corner geometry without repeating the same photograph. Keep the headline clearly legible and leave room around the subject. Mobile: square composition, separate crop and consistently positioned label; preserve the morning context.",
+              "dimensions": {
+                "w": 1500,
+                "h": 1500
+              },
+              "mobileDimensions": {
+                "w": 750,
+                "h": 750
+              },
+              "linkUrl": "page:Energie"
+            }
+          ]
+        },
+        {
+          "module": "hero.immersiveLifestyle",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Mach Platz für deine Routine",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Zu unserer Geschichte"
+              },
+              "brief": "Original True Nature lifestyle concept, not a copied source scene: one adult taking a quiet moment beside a bright kitchen window, with plants used only as background atmosphere and no supplement pack shown. Let the person cross a pale green graphic plane for depth; place the complete headline on an uninterrupted cream cut-in at upper left. The figure may overlap the decorative shape but never obscure the final headline. Large type, minimal supporting elements, deep green text, naturally lit photography. The scale expands from the compact category pair above. Mobile: create a new square composition with the person lower right and a clear top text zone; do not crop the desktop banner or shrink its lettering.",
+              "dimensions": {
+                "w": 3000,
+                "h": 1500
+              },
+              "mobileDimensions": {
+                "w": 1680,
+                "h": 1680
+              },
+              "linkUrl": "page:Über uns"
+            }
+          ]
+        },
+        {
+          "module": "brand.editorialSplit",
+          "layoutId": "std-2equal",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Use a genuine photograph of Lukas and Samuel Peto together, both recognisable, in a natural non-clinical setting. Request the original founder photograph if none has been supplied; do not generate or substitute likenesses. Warm cream ground and soft daylight tie this quieter image to the neighbouring story tile. No extra text or third-party logos. Mobile: use a square crop that keeps both faces entirely visible; do not assign left/right identities without confirmation.",
+              "dimensions": {
+                "w": 1500,
+                "h": 1500
+              },
+              "mobileDimensions": {
+                "w": 750,
+                "h": 750
+              },
+              "linkUrl": "page:Über uns"
+            },
+            {
+              "type": "image",
+              "imageCategory": "text_image",
+              "textOverlay": {
+                "heading": "Lerne True Nature kennen",
+                "subheading": "",
+                "body": "Ein Familienunternehmen aus Köln, gegründet von Lukas und Samuel Peto.",
+                "bullets": [],
+                "cta": "Über uns"
+              },
+              "brief": "Design a spacious editorial text image in warm cream, with a small pale green inset shape echoing the cut-in geometry above. Use a medium bold headline and a short, comfortably sized body; the adjacent founders photograph provides the visual story, so no extra icons or product packshots. Keep the CTA modest but clear. Mobile: square, increase body size and line spacing without adding copy; retain generous margins. All wording comes only from textOverlay.",
+              "dimensions": {
+                "w": 1500,
+                "h": 1500
+              },
+              "mobileDimensions": {
+                "w": 750,
+                "h": 750
+              },
+              "linkUrl": "page:Über uns"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Schlaf",
+      "heroBannerBrief": "Shared True Nature brand masthead using the supplied original logo, deep green #003e2a and warm cream #f8f7f0. Keep the logo small and clear; do not borrow the reference store typography. Recompose the brand lockup for the taller mobile header. This header sits above navigation and is separate from the content images below.",
+      "heroBannerTextOverlay": "TRUE NATURE",
+      "heroBannerDimensions": {
+        "w": 3000,
+        "h": 600
+      },
+      "heroBannerMobileDimensions": {
+        "w": 1680,
+        "h": 900
+      },
+      "sections": [
+        {
+          "module": "category.eveningEditorialPair",
+          "layoutId": "std-2equal",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Zeit für deine Abendroutine",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "A calm evening lifestyle photograph with an adult closing a book beside a warm lamp. No product package, capsules or medical imagery. A cream upper-left cut-in carries the large, fully readable headline; the shoulder crosses a pale green background shape, creating restrained depth within the image. Make the photography dominant but quieter than Home. Mobile: a dedicated square crop with the full headline on its own clean area and the hand/book below it. This is an original application of the reference macro style, not a claim about a source supplement scene.",
+              "dimensions": {
+                "w": 1500,
+                "h": 1500
+              },
+              "mobileDimensions": {
+                "w": 750,
+                "h": 750
+              }
+            },
+            {
+              "type": "image",
+              "imageCategory": "text_image",
+              "textOverlay": {
+                "heading": "Finde deine Auswahl",
+                "subheading": "",
+                "body": "Entdecke das Sortiment für deine Abendroutine.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Create a quiet companion tile on warm cream with deep green text and a small abstract pale green plane. Medium headline, one short body line, plenty of negative space; no icons suggesting a medical outcome. Its role is to hand off directly to the native product choices below, not to repeat product descriptions. Mobile: square canvas, large readable text and no decorative elements near the edges.",
+              "dimensions": {
+                "w": 1500,
+                "h": 1500
+              },
+              "mobileDimensions": {
+                "w": 750,
+                "h": 750
+              }
+            }
+          ]
+        },
+        {
+          "module": "commerce.categoryAssortment",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "asins": [
+                "B0FY73CZM8",
+                "B089YWB481",
+                "B0CLD91XC9",
+                "B0D496GM3H",
+                "B0DYK2148G"
+              ],
+              "collectionTitle": "Schlaf",
+              "brief": "Show the five supplied Schlaf ASINs as one native Amazon product grid, preserving the supplied category mapping. Product imagery and factual listing titles come from the linked product records. Do not manufacture ingredient, dosage or sleep-effect claims. This clean comparison area deliberately drops the layered lifestyle treatment above; do not add another grid or repeat these same products in a separate linked showcase."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Energie",
+      "heroBannerBrief": "Shared True Nature brand masthead using the supplied original logo, deep green #003e2a and warm cream #f8f7f0. Keep the logo small and clear; do not borrow the reference store typography. Recompose the brand lockup for the taller mobile header. This header sits above navigation and is separate from the content images below.",
+      "heroBannerTextOverlay": "TRUE NATURE",
+      "heroBannerDimensions": {
+        "w": 3000,
+        "h": 600
+      },
+      "heroBannerMobileDimensions": {
+        "w": 1680,
+        "h": 900
+      },
+      "sections": [
+        {
+          "module": "category.morningLifestyle",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Dein Tag. Dein Rhythmus.",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Create a broad morning lifestyle photograph of an adult preparing to leave home in natural daylight, with a clean cream text cut-in and a pale green graphic area partially behind the figure. No supplement shown, no athletic or medical transformation implied. Large but concise headline; keep the rest of the scene photographically calm. This introduces a compact visual selection rather than a long explanation. Mobile: recompose into a square with the person beneath the headline, preserving generous safe spacing and the full scene context.",
+              "dimensions": {
+                "w": 3000,
+                "h": 1200
+              },
+              "mobileDimensions": {
+                "w": 1680,
+                "h": 1680
+              }
+            }
+          ]
+        },
+        {
+          "module": "products.graphicSelection",
+          "layoutId": "2x2wide",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Original product selection image for ASIN B0DN1NTRZC. Use only its supplied unchanged product photo, on a warm cream field with a pale green ground plane and a restrained contact shadow. Keep one pack dominant and its original label readable; do not invent a rendering, packaging, ingredient callout, dose, badge or benefit. Use the same image scale and placement as the other three selections. An offset cream corner may join the surrounding page ground, but never cut into the pack. This is a graphic image linked to the product, not a native Amazon product card. Mobile: design a square canvas, centre the product and preserve the full label; no landscape shrinking. No added copy is required.",
+              "dimensions": {
+                "w": 1500,
+                "h": 750
+              },
+              "mobileDimensions": {
+                "w": 750,
+                "h": 750
+              },
+              "linkAsin": "B0DN1NTRZC"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Original product selection image for ASIN B088TT7J1G. Use only its supplied unchanged product photo, on a warm cream field with a pale green ground plane and a restrained contact shadow. Keep one pack dominant and its original label readable; do not invent a rendering, packaging, ingredient callout, dose, badge or benefit. Use the same image scale and placement as the other three selections. An offset cream corner may join the surrounding page ground, but never cut into the pack. This is a graphic image linked to the product, not a native Amazon product card. Mobile: design a square canvas, centre the product and preserve the full label; no landscape shrinking. No added copy is required.",
+              "dimensions": {
+                "w": 1500,
+                "h": 750
+              },
+              "mobileDimensions": {
+                "w": 750,
+                "h": 750
+              },
+              "linkAsin": "B088TT7J1G"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Original product selection image for ASIN B0DPN4LF94. Use only its supplied unchanged product photo, on a warm cream field with a pale green ground plane and a restrained contact shadow. Keep one pack dominant and its original label readable; do not invent a rendering, packaging, ingredient callout, dose, badge or benefit. Use the same image scale and placement as the other three selections. An offset cream corner may join the surrounding page ground, but never cut into the pack. This is a graphic image linked to the product, not a native Amazon product card. Mobile: design a square canvas, centre the product and preserve the full label; no landscape shrinking. No added copy is required.",
+              "dimensions": {
+                "w": 1500,
+                "h": 750
+              },
+              "mobileDimensions": {
+                "w": 750,
+                "h": 750
+              },
+              "linkAsin": "B0DPN4LF94"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Original product selection image for ASIN B0DBLPCNHC. Use only its supplied unchanged product photo, on a warm cream field with a pale green ground plane and a restrained contact shadow. Keep one pack dominant and its original label readable; do not invent a rendering, packaging, ingredient callout, dose, badge or benefit. Use the same image scale and placement as the other three selections. An offset cream corner may join the surrounding page ground, but never cut into the pack. This is a graphic image linked to the product, not a native Amazon product card. Mobile: design a square canvas, centre the product and preserve the full label; no landscape shrinking. No added copy is required.",
+              "dimensions": {
+                "w": 1500,
+                "h": 750
+              },
+              "mobileDimensions": {
+                "w": 750,
+                "h": 750
+              },
+              "linkAsin": "B0DBLPCNHC"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Über uns",
+      "heroBannerBrief": "Shared True Nature brand masthead using the supplied original logo, deep green #003e2a and warm cream #f8f7f0. Keep the logo small and clear; do not borrow the reference store typography. Recompose the brand lockup for the taller mobile header. This header sits above navigation and is separate from the content images below.",
+      "heroBannerTextOverlay": "TRUE NATURE",
+      "heroBannerDimensions": {
+        "w": 3000,
+        "h": 600
+      },
+      "heroBannerMobileDimensions": {
+        "w": 1680,
+        "h": 900
+      },
+      "sections": [
+        {
+          "module": "brand.founderPortrait",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Aus Köln. Für deinen Alltag.",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Large authentic founder photograph with Lukas and Samuel Peto together. Request a new or supplied original photograph if the asset is missing; never create substitute founder likenesses. Use daylight and a relaxed real setting. A cream corner cut-in anchors the complete large headline; an abstract pale green backing plane can pass behind the figures to carry the selected macro style. Avoid stereotypical laboratory sets or invented certification props. Compared with the product pages this is a human editorial opening. Mobile: separate square composition retaining both faces and the full headline above them.",
+              "dimensions": {
+                "w": 3000,
+                "h": 1500
+              },
+              "mobileDimensions": {
+                "w": 1680,
+                "h": 1680
+              }
+            }
+          ]
+        },
+        {
+          "module": "brand.originsAndApproach",
+          "layoutId": "std-2equal",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "text_image",
+              "textOverlay": {
+                "heading": "Lukas und Samuel Peto",
+                "subheading": "",
+                "body": "2019 haben wir True Nature gegründet. Heute sind wir ein Familienunternehmen aus Köln.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Warm cream editorial text image, visually connected to the founder photograph above through the same small pale green inset geometry. Medium headline, short body and generous margins. No product photo or founder name labels over unverified portraits. Let this tile carry the origin facts once; do not repeat them in the neighbouring tile. Mobile: use a square composition with a comfortably sized body and clear line breaks.",
+              "dimensions": {
+                "w": 1500,
+                "h": 1500
+              },
+              "mobileDimensions": {
+                "w": 750,
+                "h": 750
+              }
+            },
+            {
+              "type": "image",
+              "imageCategory": "text_image",
+              "textOverlay": {
+                "heading": "Natur trifft Wissenschaft",
+                "subheading": "",
+                "body": "Natürliche Inhaltsstoffe, moderne Wissenschaft und strenge Qualitätsstandards.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Graphic editorial companion on deep green using cream text and a restrained pale green plane, with no stock lab imagery or unverified proof symbols. The headline is the dominant element, followed by one short factual body. Use contrast in ground and type hierarchy to separate the approach from the origin story beside it. Mobile: square, maintain readable body size and keep all copy fully visible. This contrast is an original True Nature composition; do not reuse the reference brand colours or lettering.",
+              "dimensions": {
+                "w": 1500,
+                "h": 1500
+              },
+              "mobileDimensions": {
+                "w": 750,
+                "h": 750
+              }
+            }
+          ]
+        },
+        {
+          "module": "navigation.returnToAssortment",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "creative",
+              "textOverlay": {
+                "heading": "Entdecke deine Routine",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Zum Sortiment"
+              },
+              "brief": "Compact final navigation image on warm cream with a single pale green geometric cut-in and a clear deep green headline. No repeated founders story, product images or additional trust claims. The CTA leads back to Home, letting visitors choose between the two confirmed categories. Mobile: keep this as a deliberate shallow navigation strip with large lettering; it is not a lifestyle hero and does not need a square crop.",
+              "dimensions": {
+                "w": 3000,
+                "h": 400
+              },
+              "mobileDimensions": {
+                "w": 1680,
+                "h": 400
+              },
+              "linkUrl": "page:Home"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
