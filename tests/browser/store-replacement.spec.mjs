@@ -1,3 +1,4 @@
+import { openStoreBuilder, TEST_DRIVE_FOLDER } from './store-drive-fixture.mjs';
 import { test, expect } from '@playwright/test';
 import { createClient } from '@libsql/client';
 import { readFile, mkdtemp, rm } from 'node:fs/promises';
@@ -11,7 +12,7 @@ const source=await readFile(new URL('../../api/stores.js',import.meta.url),'utf8
 const original={brandName:'Arensberger',marketplace:'de',asins:[],products:[],pages:[{id:'original',name:'Gestaltete Startseite',sections:[{id:'hero',layoutId:'1',tiles:[{type:'image',textOverlay:{heading:'Bestehende Gestaltung'},uploadedImage:'https://images.test/original.webp'}]}]}]};
 const incoming={brandName:'Arensberger',pages:[{name:'Neue Startseite',sections:[{layoutId:'1',tiles:[{type:'image',brief:'New concept',textOverlay:{heading:'Neues Konzept'}}]}]}]};
 
-async function setup(page) {
+async function setup(page, baseURL) {
   const temp=await mkdtemp(resolve('.replacement-browser-'));
   const db=createClient({url:'file:'+join(temp,'store.db')});
   await db.execute(`CREATE TABLE stores(id TEXT PRIMARY KEY,brand_name TEXT,marketplace TEXT,data TEXT,share_token TEXT UNIQUE,page_count INTEGER,product_count INTEGER,created_at TEXT DEFAULT '2026-10-07 11:39:41',updated_at TEXT DEFAULT '2026-11-11 10:18:22')`);
@@ -31,21 +32,22 @@ async function setup(page) {
   });
   await page.route('**/api/feedback*',route=>route.fulfill({json:{counts:{},neu:0,feedback:[]}}));
   await page.route('https://images.test/**',route=>route.fulfill({contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="500" height="200"><rect width="500" height="200" fill="#2c5f8e"/></svg>'}));
-  await page.goto('/');
-  await expect(page.getByRole('button',{name:'Arensberger öffnen',exact:true})).toBeVisible();
-  await page.getByRole('button',{name:'+ Neuer Store',exact:true}).click();
-  await page.getByLabel('Ohne Stilreferenz fortfahren').check();
-  await page.getByLabel('Briefing JSON', { exact: true }).fill(JSON.stringify(incoming));
-  await page.getByRole('button',{name:'Importieren',exact:true}).click();
-  return {db,writes,close:async()=>{await page.close();db.close();await rm(temp,{recursive:true,force:true});}};
+  const app = await openStoreBuilder(page, baseURL);
+  await expect(app.getByRole('button',{name:'Arensberger öffnen',exact:true})).toBeVisible();
+  await app.getByRole('button',{name:'+ Neuer Store',exact:true}).click();
+  await app.getByLabel('Google-Drive-Kundenordner (Pflichtfeld)').fill(TEST_DRIVE_FOLDER);
+  await app.getByLabel('Ohne Stilreferenz fortfahren').check();
+  await app.getByLabel('Briefing JSON', { exact: true }).fill(JSON.stringify(incoming));
+  await app.getByRole('button',{name:'Importieren',exact:true}).click();
+  return {app,db,writes,close:async()=>{await page.close();db.close();await rm(temp,{recursive:true,force:true});}};
 }
 
 for(const width of [1440,390]) {
-  test(`same-brand replacement is a visible, cancellable in-app warning at ${width}px`,async({page},info)=>{
+  test(`same-brand replacement is a visible, cancellable in-app warning at ${width}px`,async({page,baseURL},info)=>{
     await page.setViewportSize({width,height:800});
-    const fixture=await setup(page);
+    const fixture=await setup(page, baseURL);
     try{
-      const dialog=page.getByRole('alertdialog',{name:'Bestehenden Store ersetzen?',exact:true});
+      const dialog=fixture.app.getByRole('alertdialog',{name:'Bestehenden Store ersetzen?',exact:true});
       await expect(dialog).toBeVisible();
       await expect(dialog).toContainText('Arensberger');
       await expect(dialog.getByRole('button',{name:'Abbrechen',exact:true})).toBeFocused();
@@ -54,20 +56,20 @@ for(const width of [1440,390]) {
       await info.attach('replacement-warning',{path:await page.screenshot({path:info.outputPath('replacement-warning.png')}).then(()=>info.outputPath('replacement-warning.png')),contentType:'image/png'});
       await dialog.getByRole('button',{name:'Abbrechen',exact:true}).click();
       await expect(dialog).toHaveCount(0);
-      await expect(page.getByLabel('Briefing JSON', { exact: true })).toHaveValue(JSON.stringify(incoming));
+      await expect(fixture.app.getByLabel('Briefing JSON', { exact: true })).toHaveValue(JSON.stringify(incoming));
       expect(fixture.writes).toHaveLength(0);
       expect(JSON.parse((await fixture.db.execute("SELECT data FROM stores WHERE id='arensberger'")).rows[0].data)).toEqual(original);
     }finally{await fixture.close();}
   });
 }
 
-test('only explicit replacement publishes the new JSON and retains the original shared link',async({page})=>{
-  const fixture=await setup(page);
+test('only explicit replacement publishes the new JSON and retains the original shared link',async({page,baseURL})=>{
+  const fixture=await setup(page, baseURL);
   try{
     const saved=page.waitForResponse(response=>response.url().includes('/api/stores')&&response.request().method()==='POST'&&response.status()===200);
-    await page.getByRole('alertdialog').getByRole('button',{name:'Bestehenden Store ersetzen',exact:true}).click();
+    await fixture.app.getByRole('alertdialog').getByRole('button',{name:'Bestehenden Store ersetzen',exact:true}).click();
     await saved;
-    await expect(page.getByRole('alertdialog')).toHaveCount(0);
+    await expect(fixture.app.getByRole('alertdialog')).toHaveCount(0);
     await expect.poll(()=>fixture.writes.length,{timeout:10000}).toBe(1);
     expect(fixture.writes[0].replaceExisting.revision).toMatch(/^[a-f0-9]{64}$/);
     const row=(await fixture.db.execute("SELECT * FROM stores WHERE id='arensberger'")).rows[0];

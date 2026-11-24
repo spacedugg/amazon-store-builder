@@ -13,6 +13,7 @@ import Canvas from './components/Canvas';
 import PropertiesPanel from './components/PropertiesPanel';
 import AsinPanel from './components/AsinPanel';
 import NewStoreModal from './components/NewStoreModal';
+import { configureStoreDriveFolder } from './storeDriveExport.mjs';
 import PatchImportModal from './components/PatchImportModal';
 import { applyStorePatch } from './storePatch';
 import LinkDialog from './components/LinkDialog';
@@ -1431,11 +1432,16 @@ export default function App() {
     setShowNewStoreModal(true);
   };
 
-  var handleCreateEmpty = function(direction = {}) {
+  var handleCreateEmpty = async function(direction, driveFolderUrl) {
+    var attempt = ++importAttemptRef.current;
+    var context = storeContextRef.current;
+    var binding = await configureStoreDriveFolder(driveFolderUrl);
+    if (attempt !== importAttemptRef.current || context !== storeContextRef.current) return;
     storeContextRef.current++;
     replacementGrantRef.current = null;
     var firstPageId = uid();
     var initialStore = Object.assign({}, EMPTY_STORE, direction, {
+      driveExportId: binding.projectKey,
       pages: [{
         id: firstPageId,
         name: 'Home',
@@ -1459,29 +1465,30 @@ export default function App() {
     setShowOverview(false);
   };
 
-  var handleImportBriefing = async function(briefingData) {
-    try {
-      var imported = importBriefingToStore(briefingData);
-      // Legacy/briefing structures may contain duplicate Bestseller modules or
-      // exceed current builder limits. Let users IMPORT and repair them inside
-      // the editor; validation and publish/save restrictions still apply.
-      if (!await approveImport(imported)) return;
-      storeContextRef.current++;
-      setStore(imported);
-      setCurPage(imported.pages[0] ? imported.pages[0].id : '');
-      setSel(null);
-      setWarnings([]);
-      setRequestedAsins(imported.asins.map(function(a) { return a.asin; }));
-      setStoreId(null);
-      setShareToken(null);
-      storeIdRef.current = null;
-      shareTokenRef.current = null;
-      savedBrandNameRef.current = '';
-      setShowNewStoreModal(false);
-      setShowOverview(false);
-    } catch (e) {
-      setLinkDialog({kind:'error',title:'Import fehlgeschlagen',message:e.message});
-    }
+  var handleImportBriefing = async function(briefingData, driveFolderUrl) {
+    var imported = importBriefingToStore(briefingData);
+    // Legacy/briefing structures may contain duplicate Bestseller modules or
+    // exceed current builder limits. Let users IMPORT and repair them inside
+    // the editor; validation and publish/save restrictions still apply.
+    if (!await approveImport(imported)) return;
+    var attempt = importAttemptRef.current;
+    var context = storeContextRef.current;
+    var binding = await configureStoreDriveFolder(driveFolderUrl, replacementGrantRef.current?.id);
+    if (attempt !== importAttemptRef.current || context !== storeContextRef.current) return;
+    imported.driveExportId = binding.projectKey;
+    storeContextRef.current++;
+    setStore(imported);
+    setCurPage(imported.pages[0] ? imported.pages[0].id : '');
+    setSel(null);
+    setWarnings([]);
+    setRequestedAsins(imported.asins.map(function(a) { return a.asin; }));
+    setStoreId(null);
+    setShareToken(null);
+    storeIdRef.current = null;
+    shareTokenRef.current = null;
+    savedBrandNameRef.current = '';
+    setShowNewStoreModal(false);
+    setShowOverview(false);
   };
 
   // ─── VIEW MODE ───
@@ -1997,6 +2004,7 @@ export default function App() {
     <div className="app-root">
       <Topbar
         store={store}
+        savedStoreId={storeId}
         shareToken={shareToken}
         onExport={handleExport}
         onEditDesignDirection={() => setShowDesignDirection(true)}

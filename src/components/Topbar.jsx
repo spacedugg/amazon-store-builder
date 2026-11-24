@@ -1,3 +1,4 @@
+import StoreDriveExport from './StoreDriveExport';
 import StoreReferenceLibraryButton from './StoreReferenceLibrary';
 import { useState, useEffect } from 'react';
 import { brandToSlug } from '../storage';
@@ -93,7 +94,7 @@ function formatCustomerProgress(p) {
   return 'Speichere...';
 }
 
-export default function Topbar({ onEditDesignDirection, store, shareToken, onExport, onSave, manualSaveProgress, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onLoadProducts, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew, onShowStores, returningToOverview }) {
+export default function Topbar({ onEditDesignDirection, store, savedStoreId, shareToken, onExport, onSave, manualSaveProgress, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onLoadProducts, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew, onShowStores, returningToOverview }) {
   var folderProgressLabel = '';
   if (folderUploadProgress) {
     folderProgressLabel = 'Bilder ' + (folderUploadProgress.uploaded || 0) + ' / ' + folderUploadProgress.total;
@@ -157,6 +158,7 @@ export default function Topbar({ onEditDesignDirection, store, shareToken, onExp
             style={{ background: '#0F1111', color: '#fff', borderColor: '#0F1111' }}>
             {customerSaveProgress ? formatCustomerProgress(customerSaveProgress) : 'Kunden-Link'}
           </button>
+          <StoreDriveExport key={savedStoreId || 'draft'} storeId={savedStoreId} disabled={!!manualSaveProgress} />
           {onShowFeedback && (
             <button className="btn" onClick={onShowFeedback}
               title="Feedback, das der Kunde in der Vorschau hinterlassen hat">

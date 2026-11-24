@@ -1,8 +1,9 @@
+import { openStoreBuilder, TEST_DRIVE_FOLDER } from './store-drive-fixture.mjs';
 import { test, expect } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 
 for (const style of ['bold', 'minimal', 'lifestyle']) {
-  test(`${style} generated concept imports and reaches the designer intact`, async ({ page }, info) => {
+  test(`${style} generated concept imports and reaches the designer intact`, async ({ page, baseURL }, info) => {
     const concept = JSON.parse(await readFile(`tests/fixtures/reference-concepts/${style}.json`, 'utf8'));
     let imported;
     await page.route('**/api/**', async route => {
@@ -13,16 +14,18 @@ for (const style of ['bold', 'minimal', 'lifestyle']) {
       if (url.includes('/api/timer')) return route.fulfill({ json: { seconds: 0, running: false } });
       return route.fulfill({ json: { stores: [], counts: {}, items: [] } });
     });
-    await page.goto('/');
-    await page.getByRole('button', { name: '+ Neuer Store', exact: true }).click();
-    await page.getByLabel('Stilreferenzen auswählen', { exact: true }).check();
+    const app = await openStoreBuilder(page, baseURL);
+    await app.getByRole('button', { name: '+ Neuer Store', exact: true }).click();
+    await app.getByLabel('Stilreferenzen auswählen', { exact: true }).check();
     const reference = concept.designReferences[0];
-    await page.getByLabel('Referenz-Link 1', { exact: true }).fill(reference.url);
-    await page.getByLabel('Stilhinweis 1').fill(reference.notes);
-    await page.getByLabel('Briefing JSON', { exact: true }).fill(JSON.stringify(concept));
-    await page.getByRole('button', { name: 'Importieren', exact: true }).click();
-    await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('amazon-store-builder-autosave') || '{}').pages?.length)).toBe(4);
-    imported = await page.evaluate(() => JSON.parse(localStorage.getItem('amazon-store-builder-autosave')));
+    await app.getByLabel('Referenz-Link 1', { exact: true }).fill(reference.url);
+    await app.getByLabel('Stilhinweis 1').fill(reference.notes);
+    await app.getByLabel('Briefing JSON', { exact: true }).fill(JSON.stringify(concept));
+    await expect(app.getByRole('button', { name: 'Importieren', exact: true })).toBeDisabled();
+    await app.getByLabel('Google-Drive-Kundenordner (Pflichtfeld)').fill(TEST_DRIVE_FOLDER);
+    await app.getByRole('button', { name: 'Importieren', exact: true }).click();
+    await expect.poll(() => app.evaluate(() => JSON.parse(localStorage.getItem('amazon-store-builder-autosave') || '{}').pages?.length)).toBe(4);
+    imported = await app.evaluate(() => JSON.parse(localStorage.getItem('amazon-store-builder-autosave')));
     expect(imported.manualCI).toEqual(concept.manualCI);
     expect(imported.productCI).toEqual(concept.productCI);
     for (let p = 0; p < concept.pages.length; p++) {
