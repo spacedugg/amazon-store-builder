@@ -19,7 +19,7 @@ function HomepageCapture({ entry, en }) {
   return <figure className="srl-homepage-figure">{failed ? <p role="alert">{en ? 'The saved homepage screenshot could not be loaded.' : 'Der gespeicherte Homepage-Screenshot konnte nicht geladen werden.'}</p> : <img src={image.url} alt={(en ? 'Homepage capture: ' : 'Homepage-Aufnahme: ') + entry.brandName} width={image.width} height={image.height} onError={() => setFailed(true)} />}</figure>;
 }
 
-export function StoreReferenceLibrary({ onClose, onSelect, selectedUrls = [], lang = 'de' }) {
+export function StoreReferenceLibrary({ onClose, onSelect, onEditReferences, selectedUrls = [], lang = 'de' }) {
   const en = lang === 'en';
   const [rows, setRows] = useState(() => mergeReferenceCatalog(catalog));
   const [active, setActive] = useState(null);
@@ -98,12 +98,21 @@ export function StoreReferenceLibrary({ onClose, onSelect, selectedUrls = [], la
           {!visible.length && <p>{en ? 'No matching examples.' : 'Keine passenden Beispiele.'}</p>}
         </>}
       </div>
-      {onSelect && <footer className="srl-footer"><span>{selected.size} {en ? 'selected' : 'ausgewählt'}</span><button type="button" disabled={!selected.size} onClick={() => { onSelect(rows.filter(r => selected.has(r.id))); onClose(); }}>{en ? 'Use selection' : 'Auswahl übernehmen'}</button></footer>}
+      {onSelect && <footer className="srl-footer">
+        {onEditReferences
+          ? <button type="button" className="srl-secondary" onClick={() => { onClose(); onEditReferences(); }}>
+              {en ? 'Edit style references' : 'Stilreferenzen bearbeiten'}
+            </button>
+          : <span>{selected.size} {en ? 'selected' : 'ausgewählt'}</span>}
+        <button type="button" disabled={!selected.size} onClick={() => { onSelect(rows.filter(r => selected.has(r.id))); onClose(); }}>
+          {en ? 'Use selection' : 'Auswahl übernehmen'}
+        </button>
+      </footer>}
     </section>
   </div>, document.body);
 }
 
-export default function StoreReferenceLibraryButton({ onSelect, selectedUrls, lang = 'de', label }) {
+export default function StoreReferenceLibraryButton({ onSelect, onEditReferences, selectedUrls, lang = 'de', label, triggerClassName = 'srl-launch' }) {
   const [open, setOpen] = useState(false);
-  return <><button type="button" className="srl-launch" onClick={() => setOpen(true)}>{label || (lang === 'en' ? 'Store examples' : 'Store-Beispiele')}</button>{open && <StoreReferenceLibrary onClose={() => setOpen(false)} onSelect={onSelect} selectedUrls={selectedUrls} lang={lang} />}</>;
+  return <><button type="button" className={triggerClassName} onClick={() => setOpen(true)}>{label || (lang === 'en' ? 'Store examples' : 'Store-Beispiele')}</button>{open && <StoreReferenceLibrary onClose={() => setOpen(false)} onSelect={onSelect} onEditReferences={onEditReferences} selectedUrls={selectedUrls} lang={lang} />}</>;
 }

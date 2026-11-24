@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { configureStoreDriveFolder, exportSavedStoreImages, isDriveFolderLink } from '../storeDriveExport.mjs';
 
-export default function StoreDriveExport({ storeId, disabled }) {
+export default function StoreDriveExport({ storeId, disabled, renderTrigger }) {
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState(null);
   const [error, setError] = useState('');
@@ -31,11 +31,7 @@ export default function StoreDriveExport({ storeId, disabled }) {
 
   return (
     <>
-      <button type="button" className="btn" disabled={!storeId || disabled || busy}
-        title={storeId ? 'Gespeicherte Store-Uploads in den verknüpften Drive-Ordner exportieren' : 'Speichere den Store vor dem Export'}
-        onClick={() => run()}>
-        Bilder nach Drive
-      </button>
+      {renderTrigger({ disabled: !storeId || disabled || busy, onClick: () => run() })}
       {open && (
         <div className="modal-overlay" onClick={() => { if (!busy) setOpen(false); }}>
           <div className="modal-box" role="dialog" aria-modal="true" aria-label="Bilder nach Drive"
