@@ -755,3 +755,11 @@ html.embed .topbar-sep { background: #E3DED1; }
   .store-toolbar-left, .store-toolbar-right { gap: 4px; }
   .store-editor-topbar .btn { padding-inline: 6px; font-size: 11px; }
 }
+@media (max-width: 350px) {
+  .topbar.store-editor-topbar, html.embed .topbar.store-editor-topbar { gap: 3px; padding-inline: 4px; }
+  .store-toolbar-left, .store-toolbar-right { gap: 3px; }
+  .store-editor-topbar .btn { padding-inline: 4px; font-size: 10px; }
+  .store-editor-topbar .btn:has(.store-toolbar-feedback-count) { position: relative; }
+  .store-toolbar-feedback-count { position: absolute; inset: -5px -3px auto auto; margin: 0; }
+  .store-editor-topbar .topbar-back [aria-hidden], .store-toolbar-more > .btn [aria-hidden] { display: none; }
+}
