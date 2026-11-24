@@ -45,7 +45,7 @@ function MoreMenu({ items }) {
       onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}>
       <button type="button" className="btn" ref={trigger} onClick={() => setOpen(value => !value)}
         onKeyDown={event => { if (event.key === 'ArrowDown' && !open) { event.preventDefault(); setOpen(true); } }}
-        aria-haspopup="menu" aria-expanded={open} aria-controls={open ? id : undefined}>Mehr <span aria-hidden="true">▾</span></button>
+        title="Weitere Funktionen" aria-haspopup="menu" aria-expanded={open} aria-controls={open ? id : undefined}>Mehr <span aria-hidden="true">▾</span></button>
       {open && (
         <div id={id} role="menu" aria-label="Weitere Funktionen" className="store-toolbar-menu" ref={menu} onKeyDown={navigate}>
           {items.filter(Boolean).map(item => (
