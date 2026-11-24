@@ -3,11 +3,13 @@ import { designDirectionData, designReferenceError } from '../designDirection.mj
 import { buildMacroStyleConceptPrompt } from '../storefrontConceptPrompt';
 import { useState, useRef } from 'react';
 import { STOREFRONT_ASIN_PROMPT } from '../storefrontAsinPrompt';
+import { isDriveFolderLink } from '../storeDriveExport.mjs';
 
 export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initialReferences = [] }) {
   var [text, setText] = useState('');
   var [error, setError] = useState('');
   var [importing, setImporting] = useState(false);
+  var [driveFolderUrl, setDriveFolderUrl] = useState('');
   var [copied, setCopied] = useState(false);
   var [references, setReferences] = useState(() => initialReferences.length ? initialReferences.map(r => ({ url: r.url, notes: r.notes || '' })) : [{ url: '', notes: '' }]);
   var [copyError, setCopyError] = useState('');
@@ -15,6 +17,7 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
   var referenceError = choice === true ? designReferenceError(references) : '';
   var directionReady = choice !== null && !referenceError && (choice === false || references.some(row => row.url.trim()));
   var conceptPrompt = referenceError ? '' : buildMacroStyleConceptPrompt(choice === true ? references : []);
+  var driveFolderReady = isDriveFolderLink(driveFolderUrl);
 
   var fileRef = useRef(null);
 
@@ -30,7 +33,7 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
   }
 
   var handleImport = async function() {
-    if (importing || !directionReady) return;
+    if (importing || !directionReady || !driveFolderReady) return;
     if (!text.trim()) {
       setError('Bitte Briefing JSON einfügen oder Datei wählen.');
       return;
@@ -38,13 +41,26 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
     try {
       var data = JSON.parse(text);
       setImporting(true);
-      await onImport({ ...data, ...designDirectionData(references, choice) });
+      await onImport({ ...data, ...designDirectionData(references, choice) }, driveFolderUrl.trim());
     } catch (e) {
       setError('Import fehlgeschlagen, ' + e.message);
     } finally {
       setImporting(false);
     }
   };
+
+  async function handleCreateEmpty() {
+    if (importing || !directionReady || !driveFolderReady) return;
+    setImporting(true);
+    setError('');
+    try {
+      await onCreateEmpty(designDirectionData(references, choice), driveFolderUrl.trim());
+    } catch (cause) {
+      setError(cause.message);
+    } finally {
+      setImporting(false);
+    }
+  }
 
   var handleFile = function(e) {
     var file = e.target.files && e.target.files[0];
@@ -66,6 +82,15 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
           <h2 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#0f172a' }}>Neuen Store anlegen</h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 20, color: '#64748b', cursor: 'pointer', lineHeight: 1, padding: 0 }}>&times;</button>
+        </div>
+
+        <div style={{ marginBottom: 14 }}>
+          <label htmlFor="new-store-drive-folder" style={{ display: 'block', fontWeight: 600, marginBottom: 6 }}>
+            Google-Drive-Kundenordner (Pflichtfeld)
+          </label>
+          <input id="new-store-drive-folder" type="url" required value={driveFolderUrl}
+            onChange={event => { setDriveFolderUrl(event.target.value); setError(''); }} disabled={importing}
+            placeholder="https://drive.google.com/drive/folders/…" style={{ width: '100%' }} />
         </div>
 
         <DesignDirectionFields references={references} setReferences={setReferences} choice={choice} setChoice={setChoice} />
@@ -122,9 +147,9 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
         <div style={{ marginTop: 14, display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
           <input ref={fileRef} type="file" accept=".json,application/json" onChange={handleFile} style={{ display: 'none' }} />
           <button className="btn" onClick={function() { fileRef.current && fileRef.current.click(); }}>JSON Datei wählen</button>
-          <button className="btn btn-primary" onClick={handleImport} disabled={!text.trim() || importing || !directionReady}>{importing ? 'Store prüfen …' : 'Importieren'}</button>
+          <button className="btn btn-primary" onClick={handleImport} disabled={!text.trim() || importing || !directionReady || !driveFolderReady}>{importing ? 'Store prüfen …' : 'Importieren'}</button>
           <div style={{ flex: 1 }} />
-          <button className="btn" onClick={() => onCreateEmpty(designDirectionData(references, choice))} disabled={importing || !directionReady} style={{ fontSize: 11, color: '#64748b' }}>Stattdessen leeren Store starten</button>
+          <button className="btn" onClick={handleCreateEmpty} disabled={importing || !directionReady || !driveFolderReady} style={{ fontSize: 11, color: '#64748b' }}>Stattdessen leeren Store starten</button>
         </div>
       </div>
     </div>
