@@ -1,4 +1,6 @@
 import DesignDirectionDialog from './components/DesignDirection';
+import { normaliseDesignReferences } from './designDirection.mjs';
+import { appendReferenceChoices } from './storeReferences.mjs';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink, setSessionStore, getSessionStore, brandToSlug, shareBaseUrl } from './storage';
@@ -2005,9 +2007,13 @@ export default function App() {
       <Topbar
         store={store}
         savedStoreId={storeId}
-        shareToken={shareToken}
         onExport={handleExport}
         onEditDesignDirection={() => setShowDesignDirection(true)}
+        onUseStoreExamples={choices => setStoreWithUndo(current => ({
+          ...current,
+          designDirectionReviewed: true,
+          designReferences: appendReferenceChoices(normaliseDesignReferences(current.designReferences), choices),
+        }))}
         onSave={handleSave}
         manualSaveProgress={manualSaveProgress}
         onChangeBrandName={function(name) {
@@ -2019,7 +2025,6 @@ export default function App() {
         customerSaveProgress={customerSaveProgress}
         folderUploadProgress={folderUploadProgress}
         autoSaveStatus={autoSaveStatus}
-        hasShareToken={!!shareToken}
         viewMode={viewMode}
         onToggleView={handleToggleView}
         onNewStore={handleNewStore}

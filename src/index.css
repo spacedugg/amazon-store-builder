@@ -680,3 +680,78 @@ html.embed .topbar-sep { background: #E3DED1; }
   cursor:pointer; background:#f6f7f5; color:#263c34; border:1px solid #d7dfd8; }
 .store-delete-actions .store-delete-confirm { background:#bd2740; color:#fff; border-color:#bd2740; font-weight:700; }
 .store-delete-actions button:disabled { opacity:.5; cursor:wait; }
+
+.topbar.store-editor-topbar {
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  min-height: 46px;
+  gap: 8px;
+}
+.store-toolbar-left, .store-toolbar-right {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 6px;
+}
+.store-toolbar-feedback-count {
+  margin-inline-start: 4px;
+  padding: 1px 4px;
+  border-radius: 10px;
+  background: #b91c1c;
+  color: #fff;
+  font-size: .82em;
+}
+.store-toolbar-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.store-toolbar-more { position: relative; flex-shrink: 0; }
+.store-toolbar-menu {
+  position: absolute;
+  inset: calc(100% + 6px) 0 auto auto;
+  z-index: 151;
+  width: min(248px, calc(100vw - 16px));
+  max-height: min(430px, calc(100dvh - 60px));
+  overflow-y: auto;
+  padding: 5px;
+  border: 1px solid #e3ded1;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(0 0 0 / .16);
+}
+.store-toolbar-menu button {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #1e293b;
+  text-align: left;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.store-toolbar-menu button:not(:disabled):is(:hover, :focus-visible) { background: #f1f5f9; }
+.store-toolbar-menu button.danger { color: #b91c1c; }
+.store-toolbar-menu button:disabled { opacity: .45; cursor: default; }
+.store-toolbar-rename {
+  margin: auto;
+  width: min(360px, calc(100vw - 24px));
+  padding: 20px;
+  border: 1px solid #e3ded1;
+  border-radius: 12px;
+  color: #1e293b;
+}
+.store-toolbar-rename::backdrop { background: rgb(15 23 42 / .45); }
+.store-toolbar-rename label { display: grid; gap: 6px; margin: 12px 0; }
+.store-toolbar-rename-actions { display: flex; justify-content: flex-end; gap: 6px; }
+@media (max-width: 450px) {
+  .topbar.store-editor-topbar, html.embed .topbar.store-editor-topbar { gap: 4px; padding-inline: 6px; }
+  .store-toolbar-left, .store-toolbar-right { gap: 4px; }
+  .store-editor-topbar .btn { padding-inline: 6px; font-size: 11px; }
+}
