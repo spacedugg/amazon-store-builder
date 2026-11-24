@@ -29,6 +29,13 @@ before(async () => {
   await build({
     entryPoints:[join(rootDir,'src/App.jsx')], outfile:join(temp,'app.mjs'), bundle:true, platform:'node', format:'esm', jsx:'automatic', packages:'external', external:['react','react/jsx-runtime'],
     plugins:[{name:'isolate-editor-services',setup(build){
+      build.onResolve({filter:/^\.\/storeDriveExport\.mjs$/}, args=>({path:args.path,namespace:'drive-stub'}));
+      build.onLoad({filter:/.*/,namespace:'drive-stub'},()=>({
+        contents:`export async function configureStoreDriveFolder(...args) {
+          globalThis.__saveTest.driveFolders.push(args);
+          return { projectKey: '0123456789abcdef0123456789abcdef' };
+        }`,
+      }));
       build.onResolve({filter:/^\.\/components\//}, args=>({path:args.path,namespace:'component-stub'}));
       build.onLoad({filter:/.*/,namespace:'component-stub'}, args=>{
         const name=args.path.split('/').at(-1);
@@ -96,7 +103,7 @@ async function withEditor(store,error,run){
   const dom=new JSDOM('<div id="root"></div>',{url:'https://builder.test/'});
   const saved={window:globalThis.window,document:globalThis.document,alert:globalThis.alert,fetch:globalThis.fetch};
   globalThis.window=dom.window;globalThis.document=dom.window.document;globalThis.IS_REACT_ACT_ENVIRONMENT=true;
-  const state={fixture:store,error,saves:[],components:{},alerts:[],backups:[],fetches:[]};globalThis.__saveTest=state;
+  const state={fixture:store,error,saves:[],components:{},alerts:[],backups:[],fetches:[],driveFolders:[]};globalThis.__saveTest=state;
   globalThis.alert=m=>state.alerts.push(m);
   globalThis.fetch=async url=>{state.fetches.push(url);throw Error('Product service unavailable');};
   const root=createRoot(dom.window.document.getElementById('root'));
@@ -203,7 +210,7 @@ for (const confirmReplacement of [false, true]) {
         await act(async()=>state.components.Topbar.onNewStore());
         const imported={...fixture(),pages:[{id:'new-home',name:'New concept',sections:[]}]};
         let pending;
-        await act(async()=>{pending=state.components.NewStoreModal.onImport(imported);await Promise.resolve();});
+        await act(async()=>{pending=state.components.NewStoreModal.onImport(imported,'https://drive.google.com/drive/folders/testFolderId123');await Promise.resolve();});
         assert.equal(state.components.LinkDialog.dialog.kind,'confirm');
         assert.match(state.components.LinkDialog.dialog.message,/JOWO/);
         assert.equal(state.components.Canvas.store.pages[0].id,'home');
@@ -214,7 +221,10 @@ for (const confirmReplacement of [false, true]) {
           await act(async()=>state.components.Topbar.onSave());
           assert.equal(state.saves.length,1);
           assert.equal(state.saves[0][5].revision,'revision-1');
+          assert.equal(state.saves[0][0].driveExportId,'0123456789abcdef0123456789abcdef');
+          assert.deepEqual(state.driveFolders,[['https://drive.google.com/drive/folders/testFolderId123','jowo']]);
         }else{
+          assert.equal(state.driveFolders.length,0);
           assert.equal(state.components.Canvas.store.pages[0].sections[0].tiles[0].uploadedImage,'https://images.test/edited-desktop.webp');
           assert.equal(state.saves.length,0);
         }
@@ -233,7 +243,7 @@ test('an older in-flight save cannot attach a new import to its old store ID or 
       globalThis.fetch=async()=>({ok:true,json:async()=>({existingStore:{id:'jowo',brandName:'JOWO',brandSlug:'jowo',revision:'revision-2'}})});
       await act(async()=>state.components.Topbar.onNewStore());
       let imported;
-      await act(async()=>{imported=state.components.NewStoreModal.onImport({...fixture(),pages:[{id:'replacement',sections:[]}]});await Promise.resolve();});
+      await act(async()=>{imported=state.components.NewStoreModal.onImport({...fixture(),pages:[{id:'replacement',sections:[]}]},'https://drive.google.com/drive/folders/testFolderId123');await Promise.resolve();});
       await act(async()=>{state.components.LinkDialog.dialog.onConfirm();await imported;});
       await act(async()=>{state.saveGate=null;release();await previousSave;});
       await act(async()=>state.components.Topbar.onSave());
