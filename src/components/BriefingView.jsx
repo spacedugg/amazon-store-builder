@@ -1,5 +1,6 @@
 import { DesignerDesignDirection } from './DesignDirection';
 import StoreReferenceLibraryButton from './StoreReferenceLibrary';
+import ReferenceImageDownload from './ReferenceImageDownload';
 import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { loadStoreByShareToken, saveStore } from '../storage';
@@ -9,7 +10,7 @@ import { AmazonProductGrid, ShoppableHotspot } from './CustomerPreview';
 import { effectiveShoppableHotspots } from '../hotspots';
 import { generateMetaDescription, metaDescriptionIssues, META_MAX } from '../metaDescription';
 import { loadFeedback, updateFeedback, sharedImageInfo, tileKey as fbTileKey } from '../feedbackApi';
-import { isSameAspectRatio, tileEffectivelySynced, tileImageForView } from '../tileSync';
+import { isSameAspectRatio, tileDimensionsForView, tileEffectivelySynced, tileImageForView } from '../tileSync';
 
 var noop = function() {};
 
@@ -457,6 +458,11 @@ function FeedbackTask({ item, where, shared, onToggle, onJump }) {
 }
 
 function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, products, store, clientFeedback }) {
+  const [expandedReference, setExpandedReference] = useState(null);
+  const referenceDialog = useRef(null);
+  useEffect(() => {
+    if (expandedReference && !referenceDialog.current.open) referenceDialog.current.showModal();
+  }, [expandedReference]);
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
@@ -808,29 +814,14 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {tile.referenceImages.map(function(img, ri) {
               return (
-                <div key={ri} style={{ position: 'relative' }}>
-                  <img
-                    src={img.dataUrl} alt={img.name || 'Reference'}
-                    style={{ width: 64, height: 64, objectFit: 'cover', borderRadius: 4, border: '1px solid #fde68a', cursor: 'pointer' }}
-                    title={'Click to enlarge: ' + (img.name || 'Image ' + (ri + 1))}
-                    onClick={function() {
-                      var overlay = document.createElement('div');
-                      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;cursor:pointer;';
-                      var imgEl = document.createElement('img');
-                      imgEl.src = img.dataUrl;
-                      imgEl.style.cssText = 'max-width:90vw;max-height:80vh;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,0.5);';
-                      var dlBtn = document.createElement('a');
-                      dlBtn.href = img.dataUrl;
-                      dlBtn.download = img.name || 'reference-image.png';
-                      dlBtn.textContent = 'Download';
-                      dlBtn.style.cssText = 'padding:8px 20px;background:#fff;color:#1e293b;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;';
-                      dlBtn.onclick = function(e) { e.stopPropagation(); };
-                      overlay.appendChild(imgEl);
-                      overlay.appendChild(dlBtn);
-                      overlay.onclick = function() { document.body.removeChild(overlay); };
-                      document.body.appendChild(overlay);
-                    }}
-                  />
+                <div key={ri}>
+                  <div className="briefing-reference-image">
+                    <button type="button" className="briefing-reference-enlarge" title={'Click to enlarge: ' + (img.name || 'Image ' + (ri + 1))}
+                      onClick={event => { event.stopPropagation(); setExpandedReference(img); }}>
+                      <img src={img.dataUrl} alt={img.name || 'Reference image ' + (ri + 1)} />
+                    </button>
+                    <ReferenceImageDownload image={img} label={'Download ' + (img.name || 'reference image ' + (ri + 1))} />
+                  </div>
                   <div style={{ fontSize: 8, color: '#92400e', textAlign: 'center', marginTop: 2, maxWidth: 64, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {img.name || 'Image ' + (ri + 1)}
                   </div>
@@ -839,6 +830,17 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
             })}
           </div>
         </div>
+      )}
+      {expandedReference && (
+        <dialog ref={referenceDialog} aria-label="Reference image" className="briefing-reference-dialog"
+          onClick={event => { event.stopPropagation(); if (event.target === event.currentTarget) event.currentTarget.close(); }}
+          onClose={() => setExpandedReference(null)}>
+          <img src={expandedReference.dataUrl} alt={expandedReference.name || 'Reference image'} />
+          <div className="briefing-reference-dialog-actions">
+            <ReferenceImageDownload image={expandedReference} label="Download original" expanded />
+            <button type="button" className="btn" onClick={() => referenceDialog.current.close()}>Close</button>
+          </div>
+        </dialog>
       )}
 
     </div>
@@ -1535,7 +1537,7 @@ function PreviewMode({ store, onClose }) {
                       var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', overflow: isProduct ? 'visible' : 'hidden', minHeight: 0 });
 
                       // Determine tile dimensions for aspect ratio
-                      var dims = (isMobile ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
+                      var dims = tileDimensionsForView(tile, isMobile);
 
                       // Only show name-matched images from loaded folders — never show editor-uploaded images
                       var matchedImgSrc = null;

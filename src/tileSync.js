@@ -1,5 +1,15 @@
 // Gemeinsame Regeln dafuer, wann Desktop und Mobil EIN Bild teilen duerfen.
 
+export function tileDimensionsForView(tile, isMobile) {
+  const desktop = tile.dimensions || {};
+  const mobile = isMobile && !tile.syncDimensions ? tile.mobileDimensions || {} : {};
+  const positive = value => Number.isFinite(Number(value)) && Number(value) > 0;
+  return {
+    w: positive(mobile.w) ? Number(mobile.w) : positive(desktop.w) ? Number(desktop.w) : 3000,
+    h: positive(mobile.h) ? Number(mobile.h) : positive(desktop.h) ? Number(desktop.h) : tile.type === 'video' ? 1688 : 1200,
+  };
+}
+
 // Returns true if desktop and mobile dimensions have the same aspect ratio
 // (e.g. 3000x1500 and 1500x750 are both 2:1, or 1000x1000 and 500x500 are both 1:1)
 export function isSameAspectRatio(deskDims, mobDims) {

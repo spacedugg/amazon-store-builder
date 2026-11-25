@@ -2,6 +2,8 @@ import { useState, useRef } from 'react';
 import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector, getMinImageHeight, tileHasDimensionRule, MIN_IMAGE_RATIO_DESKTOP, MIN_IMAGE_RATIO_MOBILE, MIN_TEXT_IMAGE_HEIGHT } from '../constants';
 import { t } from '../i18n';
 import { pageCounts } from '../storeRules.mjs';
+import { tileDimensionsForView } from '../tileSync';
+import ReferenceImageDownload from './ReferenceImageDownload';
 
 // Inline Hinweis unter den Dimension Inputs. Greift nur wenn das Tile unter
 // die Mindesthöhen Regel fällt (Image Tile mit imageCategory benefit oder
@@ -242,14 +244,16 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
     );
   }
 
+  var desktopDims = tileDimensionsForView(tile, false);
+  var mobileDims = tileDimensionsForView(tile, true);
   var u = function(k, v) { onChange(Object.assign({}, tile, { [k]: v })); };
   var ud = function(which, k, v) {
     var key = which === 'mobile' ? 'mobileDimensions' : 'dimensions';
-    var cur = tile[key] || { w: which === 'mobile' ? 1680 : 3000, h: 1200 };
+    var cur = which === 'mobile' ? mobileDims : desktopDims;
     var updated = { [key]: Object.assign({}, cur, { [k]: v }) };
     // When syncing is on and desktop changes, mirror to mobile
     if (tile.syncDimensions && which === 'desktop') {
-      updated.mobileDimensions = Object.assign({}, tile.dimensions || { w: 3000, h: 1200 }, { [k]: v });
+      updated.mobileDimensions = updated[key];
     }
     onChange(Object.assign({}, tile, updated));
   };
@@ -567,13 +571,13 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
           <div className="props-section">
             <label className="label">{t('props.desktopDimensions', uiLang)}</label>
             <div className="props-dims">
-              <input type="number" value={(tile.dimensions || {}).w || 3000}
+              <input type="number" value={desktopDims.w}
                 onChange={function(e) { ud('desktop', 'w', parseInt(e.target.value) || 3000); }} className="input" />
               <span className="props-dims-x">&times;</span>
-              <input type="number" value={(tile.dimensions || {}).h || 1200}
+              <input type="number" value={desktopDims.h}
                 onChange={function(e) { ud('desktop', 'h', parseInt(e.target.value) || 1200); }} className="input" />
             </div>
-            <DimensionWarning tile={tile} width={(tile.dimensions || {}).w} height={(tile.dimensions || {}).h} viewMode="desktop" />
+            <DimensionWarning tile={tile} width={desktopDims.w} height={desktopDims.h} viewMode="desktop" />
           </div>
 
           {/* Sync Dimensions Checkbox */}
@@ -584,7 +588,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
                   var synced = e.target.checked;
                   var up = { syncDimensions: synced };
                   if (synced) {
-                    up.mobileDimensions = Object.assign({}, tile.dimensions || { w: 3000, h: 1200 });
+                    up.mobileDimensions = { ...desktopDims };
                   }
                   onChange(Object.assign({}, tile, up));
                 }} />
@@ -596,17 +600,13 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
           <div className="props-section">
             <label className="label">{t('props.mobileDimensions', uiLang)}</label>
             <div className="props-dims">
-              <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).w || 3000) : ((tile.mobileDimensions || {}).w || 1680)}
+              <input type="number" value={mobileDims.w}
                 onChange={function(e) { ud('mobile', 'w', parseInt(e.target.value) || 1680); }} className="input" disabled={!!tile.syncDimensions} />
               <span className="props-dims-x">&times;</span>
-              <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).h || 1200) : ((tile.mobileDimensions || {}).h || 1200)}
+              <input type="number" value={mobileDims.h}
                 onChange={function(e) { ud('mobile', 'h', parseInt(e.target.value) || 1200); }} className="input" disabled={!!tile.syncDimensions} />
             </div>
-            {(function() {
-              var mw = tile.syncDimensions ? (tile.dimensions || {}).w : (tile.mobileDimensions || {}).w;
-              var mh = tile.syncDimensions ? (tile.dimensions || {}).h : (tile.mobileDimensions || {}).h;
-              return <DimensionWarning tile={tile} width={mw} height={mh} viewMode="mobile" />;
-            })()}
+            <DimensionWarning tile={tile} width={mobileDims.w} height={mobileDims.h} viewMode="mobile" />
           </div>
 
           {/* Link / ASIN (single click-target for the whole image) */}
@@ -707,6 +707,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
                   return (
                     <div key={idx} style={{ position: 'relative', width: 56, height: 56, borderRadius: 4, overflow: 'hidden', border: '1px solid #e2e8f0' }}>
                       <img src={img.dataUrl} alt={img.name || ''} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <ReferenceImageDownload image={img} label={'Download ' + (img.name || 'reference image ' + (idx + 1))} />
                       <button
                         onClick={function() {
                           var updated = (tile.referenceImages || []).slice();
@@ -1301,13 +1302,13 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
           <div className="props-section">
             <label className="label">{t('props.desktopDimensions', uiLang)}</label>
             <div className="props-dims">
-              <input type="number" value={(tile.dimensions || {}).w || 3000}
+              <input type="number" value={desktopDims.w}
                 onChange={function(e) { ud('desktop', 'w', parseInt(e.target.value) || 3000); }} className="input" />
               <span className="props-dims-x">&times;</span>
-              <input type="number" value={(tile.dimensions || {}).h || 1688}
+              <input type="number" value={desktopDims.h}
                 onChange={function(e) { ud('desktop', 'h', parseInt(e.target.value) || 1688); }} className="input" />
             </div>
-            <DimensionWarning tile={tile} width={(tile.dimensions || {}).w} height={(tile.dimensions || {}).h} viewMode="desktop" />
+            <DimensionWarning tile={tile} width={desktopDims.w} height={desktopDims.h} viewMode="desktop" />
           </div>
           {/* Sync Dimensions Checkbox */}
           <div className="props-section">
@@ -1317,7 +1318,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
                   var synced = e.target.checked;
                   var up = { syncDimensions: synced };
                   if (synced) {
-                    up.mobileDimensions = Object.assign({}, tile.dimensions || { w: 3000, h: 1688 });
+                    up.mobileDimensions = { ...desktopDims };
                   }
                   onChange(Object.assign({}, tile, up));
                 }} />
@@ -1327,17 +1328,13 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
           <div className="props-section">
             <label className="label">{t('props.mobileDimensions', uiLang)}</label>
             <div className="props-dims">
-              <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).w || 3000) : ((tile.mobileDimensions || {}).w || 1680)}
+              <input type="number" value={mobileDims.w}
                 onChange={function(e) { ud('mobile', 'w', parseInt(e.target.value) || 1680); }} className="input" disabled={!!tile.syncDimensions} />
               <span className="props-dims-x">&times;</span>
-              <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).h || 1688) : ((tile.mobileDimensions || {}).h || 699)}
+              <input type="number" value={mobileDims.h}
                 onChange={function(e) { ud('mobile', 'h', parseInt(e.target.value) || 699); }} className="input" disabled={!!tile.syncDimensions} />
             </div>
-            {(function() {
-              var mw = tile.syncDimensions ? (tile.dimensions || {}).w : (tile.mobileDimensions || {}).w;
-              var mh = tile.syncDimensions ? (tile.dimensions || {}).h : (tile.mobileDimensions || {}).h;
-              return <DimensionWarning tile={tile} width={mw} height={mh} viewMode="mobile" />;
-            })()}
+            <DimensionWarning tile={tile} width={mobileDims.w} height={mobileDims.h} viewMode="mobile" />
           </div>
           {fileUpload(t('props.videoThumbnail', uiLang), tile.videoThumbnail,
             function(v) { u('videoThumbnail', v); }, function() { u('videoThumbnail', null); }, uiLang)}
