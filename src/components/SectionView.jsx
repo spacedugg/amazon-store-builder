@@ -433,8 +433,7 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
   var isMobile = viewMode === 'mobile';
   var config = getGridConfig(layout, isMobile);
   // Layout presets place tiles. The active variant of each tile sets its height.
-  var { aspectRatio, gridTemplateRows, ...gridStyle } = config.gridStyle;
-  if (gridTemplateRows) gridStyle.gridTemplateRows = gridTemplateRows.replaceAll('1fr', 'auto');
+  var gridStyle = { gridTemplateColumns: config.gridStyle.gridTemplateColumns };
 
   // Bulk image-category dropdown: only meaningful when the section contains
   // image-type tiles. Shows the common category if all image-type tiles share

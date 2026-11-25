@@ -1531,10 +1531,10 @@ function PreviewMode({ store, onClose }) {
                       })}
                     </div>
                   )}
-                  <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: isMobile ? 9 : 18, width: '100%', overflow: 'hidden' })}>
+                  <div style={{ gridTemplateColumns: config.gridStyle.gridTemplateColumns, display: 'grid', gap: isMobile ? 9 : 18, width: '100%' }}>
                     {sec.tiles.map(function(tile, ti) {
                       var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
-                      var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', overflow: isProduct ? 'visible' : 'hidden', minHeight: 0 });
+                      var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', overflow: isProduct ? 'visible' : 'hidden', minHeight: 0, minWidth: 0 });
 
                       // Determine tile dimensions for aspect ratio
                       var dims = tileDimensionsForView(tile, isMobile);

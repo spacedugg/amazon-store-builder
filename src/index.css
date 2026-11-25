@@ -782,13 +782,13 @@ html.embed .topbar-sep { background: #E3DED1; }
 .store-toolbar-rename::backdrop { background: rgb(15 23 42 / .45); }
 .store-toolbar-rename label { display: grid; gap: 6px; margin: 12px 0; }
 .store-toolbar-rename-actions { display: flex; justify-content: flex-end; gap: 6px; }
-@media (max-width: 620px) {
+@media (max-width: 850px) {
   .topbar.store-editor-topbar, html.embed .topbar.store-editor-topbar { gap: 4px; padding-inline: 6px; }
   .store-toolbar-left, .store-toolbar-right { gap: 4px; }
   .store-editor-topbar .btn { padding-inline: 6px; font-size: 11px; }
   .store-toolbar-share > span { display: none; }
 }
-@media (max-width: 420px) {
+@media (max-width: 600px) {
   .topbar.store-editor-topbar, html.embed .topbar.store-editor-topbar { gap: 3px; padding-inline: 4px; }
   .store-toolbar-left, .store-toolbar-right { gap: 3px; }
   .store-editor-topbar .btn { padding-inline: 4px; font-size: 10px; }
@@ -799,7 +799,9 @@ html.embed .topbar-sep { background: #E3DED1; }
   .store-toolbar-feedback-count { position: absolute; inset: -5px -3px auto auto; margin: 0; }
   .store-editor-topbar .topbar-back [aria-hidden], .store-toolbar-more > .btn [aria-hidden] { display: none; }
 }
-@media (max-width: 350px) {
+@media (max-width: 380px) {
+  .topbar.store-editor-topbar, html.embed .topbar.store-editor-topbar { gap: 2px; padding-inline: 3px; }
+  .store-toolbar-left, .store-toolbar-right { gap: 2px; }
   .store-editor-topbar :is(.store-toolbar-icon, .store-toolbar-share, .store-toolbar-secondary, .view-toggle-btn) { padding-inline: 2px; }
   .store-editor-topbar .store-toolbar-right svg { width: 14px; height: 14px; }
 }
