@@ -2,6 +2,21 @@ import { useEffect, useId, useRef, useState } from 'react';
 import StoreDriveExport from './StoreDriveExport';
 import StoreReferenceLibraryButton from './StoreReferenceLibrary';
 
+function ToolbarIcon({ name }) {
+  const paths = {
+    desktop: 'M2 3h16v11H2z M7 17h6 M10 14v3',
+    mobile: 'M6 2h8v16H6z M9 15h2',
+    undo: 'M8 4 3 9l5 5 M3 9h9a5 5 0 0 1 5 5v2',
+    redo: 'm12 4 5 5-5 5 M17 9H8a5 5 0 0 0-5 5v2',
+    customer: 'M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5Z M10 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z',
+    designer: 'm3 13 10-10 4 4L7 17H3z m8-8 4 4',
+    save: 'M3 3h11l3 3v11H3z M6 3v5h7V3 M6 17v-5h8v5',
+    feedback: 'M3 4h14v10H9l-4 3v-3H3z M6 8h8 M6 11h5',
+  };
+  return <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+    strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={paths[name]} /></svg>;
+}
+
 function MoreMenu({ items }) {
   const [open, setOpen] = useState(false);
   const root = useRef(null);
@@ -120,25 +135,46 @@ export default function Topbar({
               <input type="file" ref={folderInputRef} hidden webkitdirectory="" directory="" multiple
                 onChange={event => { onFolderImageUpload(event.target.files); event.target.value = ''; }} />
             )}
-            <span className="store-toolbar-status" aria-live="polite">{folderStatus || status}</span>
-            <button type="button" className="btn btn-green" onClick={onSave} disabled={!!manualSaveProgress}
-              aria-busy={!!manualSaveProgress} title={status || 'Änderungen und Bilder speichern'}>Speichern</button>
+            <span className="store-toolbar-status" aria-live="polite">{customerSaveProgress ? 'Kundenlink wird erstellt …' : folderStatus || status}</span>
+            {onToggleView && (
+              <div className="view-toggle" role="group" aria-label="Vorschauansicht">
+                {[['desktop', 'Desktop-Ansicht'], ['mobile', 'Mobilansicht']].map(([mode, label]) => (
+                  <button key={mode} type="button" className={'view-toggle-btn' + (viewMode === mode ? ' active' : '')}
+                    aria-label={label} title={label} aria-pressed={viewMode === mode} onClick={() => onToggleView(mode)}>
+                    <ToolbarIcon name={mode} />
+                  </button>
+                ))}
+              </div>
+            )}
+            {onUndo && <button type="button" className="btn store-toolbar-icon" aria-label="Rückgängig"
+              title="Rückgängig (Strg+Z)" disabled={!canUndo} onClick={onUndo}><ToolbarIcon name="undo" /></button>}
+            {onRedo && <button type="button" className="btn store-toolbar-icon" aria-label="Wiederholen"
+              title="Wiederholen (Strg+Umschalt+Z)" disabled={!canRedo} onClick={onRedo}><ToolbarIcon name="redo" /></button>}
+            {onCopyCustomerLink && <button type="button" className="btn store-toolbar-share" onClick={onCopyCustomerLink}
+              aria-label="Kundenlink" title="Kundenlink" disabled={!!customerSaveProgress} aria-busy={!!customerSaveProgress}>
+              <ToolbarIcon name="customer" /><span>Kundenlink</span>
+            </button>}
+            {onExport && <button type="button" className="btn btn-primary store-toolbar-share" onClick={onExport}
+              aria-label="Designer-Link" title="Designer-Link">
+              <ToolbarIcon name="designer" /><span>Designer-Link</span>
+            </button>}
+            <button type="button" className="btn btn-green store-toolbar-secondary" onClick={onSave} disabled={!!manualSaveProgress}
+              aria-label="Speichern" aria-busy={!!manualSaveProgress} title={status || 'Änderungen und Bilder speichern'}>
+              <ToolbarIcon name="save" /><span>Speichern</span>
+            </button>
             {onShowFeedback && (
-              <button type="button" className="btn" onClick={onShowFeedback} title="Kundenfeedback öffnen">
-                Feedback{feedbackNew > 0 && <span className="store-toolbar-feedback-count">{feedbackNew > 99 ? '99+' : feedbackNew}</span>}
+              <button type="button" className="btn store-toolbar-secondary" onClick={onShowFeedback} title="Kundenfeedback öffnen"
+                aria-label={feedbackNew > 0 ? `Feedback (${feedbackNew} neu)` : 'Feedback'}>
+                <ToolbarIcon name="feedback" /><span>Feedback</span>
+                {feedbackNew > 0 && <span className="store-toolbar-feedback-count">{feedbackNew > 99 ? '99+' : feedbackNew}</span>}
               </button>
             )}
             <StoreDriveExport key={savedStoreId || 'draft'} storeId={savedStoreId} disabled={!!manualSaveProgress}
               renderTrigger={drive => <MoreMenu items={[
-                onCopyCustomerLink && { id: 'customer', label: customerSaveProgress ? 'Kundenlink wird erstellt …' : 'Kundenlink', onClick: onCopyCustomerLink, disabled: !!customerSaveProgress },
-                onExport && { label: 'Designer-Link', onClick: onExport },
                 onFolderImageUpload && { id: 'upload', label: folderStatus || 'Bilder hochladen', onClick: () => folderInputRef.current?.click(), disabled: !!folderUploadProgress },
                 { label: 'Bilder nach Drive', ...drive },
                 onPatchImport && { label: 'Mit Claude bearbeiten', onClick: onPatchImport },
                 onLoadProducts && { label: 'Produktdaten laden', onClick: onLoadProducts },
-                onToggleView && { label: viewMode === 'mobile' ? 'Desktop-Ansicht anzeigen' : 'Mobilansicht anzeigen', onClick: () => onToggleView(viewMode === 'mobile' ? 'desktop' : 'mobile') },
-                onUndo && { label: 'Rückgängig', onClick: onUndo, disabled: !canUndo },
-                onRedo && { label: 'Wiederholen', onClick: onRedo, disabled: !canRedo },
                 onChangeBrandName && { label: 'Store-Name ändern', onClick: () => setRenaming(true) },
                 onRemoveAllImages && { label: 'Alle Bilder entfernen', danger: true, onClick: onRemoveAllImages },
               ]} />} />

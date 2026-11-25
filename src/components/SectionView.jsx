@@ -432,6 +432,8 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
   var layout = findLayout(section.layoutId);
   var isMobile = viewMode === 'mobile';
   var config = getGridConfig(layout, isMobile);
+  // Layout presets place tiles. The active variant of each tile sets its height.
+  var gridStyle = { gridTemplateColumns: config.gridStyle.gridTemplateColumns };
 
   // Bulk image-category dropdown: only meaningful when the section contains
   // image-type tiles. Shows the common category if all image-type tiles share
@@ -478,7 +480,7 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
           {totalSections > 1 && <button className="btn-icon-sm btn-icon-danger" onClick={onDelete} title={t('section.delete', uiLang)}>&times;</button>}
         </div>
       </div>
-      <div className="section-tiles" style={config.gridStyle}>
+      <div className="section-tiles" style={gridStyle}>
         {section.tiles.map(function(t, i) {
           var isDragging = dragIdx === i;
           var isDropTarget = dropIdx === i && dragIdx !== null;

@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { PRODUCT_TILE_TYPES, TILE_TYPE_LABELS } from '../constants';
 import { t } from '../i18n';
 import Wireframe from './Wireframe';
-import { tileImageForView } from '../tileSync';
+import { tileDimensionsForView, tileImageForView } from '../tileSync';
 import { effectiveShoppableHotspots } from '../hotspots';
 
 // Entfernt eventuell noch in alten Stores vorhandene **WORT** Marker, ohne
@@ -213,8 +213,10 @@ function ProductSelectorPreview({ tile, fallbackBg }) {
 
 export default function TileView({ tile, selected, onClick, viewMode, products, uiLang, previewImageSrc, onClearPreview, onChangeHotspots }) {
   var cls = 'tile' + (selected ? ' tile-selected' : '');
-  var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
+  var isMobile = viewMode === 'mobile';
+  var dims = tileDimensionsForView(tile, isMobile);
   var bgColor = tile.bgColor || '';
+  var mediaStyle = { aspectRatio: dims.w + ' / ' + dims.h, background: bgColor || undefined };
 
   // Local drag override so we can render the dragged hotspot at the cursor
   // without flooding the store with mousemove writes. Final position is
@@ -290,11 +292,9 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
   }
 
   if (tile.type === 'video') {
-    var aspect = dims.w / dims.h;
-    var displayH = Math.round(200 / aspect);
     return (
-      <div className={cls} onClick={onClick}>
-        <div className="tile-video" style={Object.assign({ minHeight: Math.max(80, displayH) }, bgColor ? { background: bgColor } : {})}>
+      <div className={cls + ' tile-media'} onClick={onClick} style={mediaStyle}>
+        <div className="tile-video" style={bgColor ? { background: bgColor } : undefined}>
           {tile.videoThumbnail ? (
             <img src={tile.videoThumbnail} className="tile-video-thumb" alt="" />
           ) : (
@@ -322,9 +322,9 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
   }
 
   if (tile.type === 'image_text') {
-    var img = previewImageSrc || (viewMode === 'mobile' ? tileImageForView(tile, true) : tile.uploadedImage);
+    var img = previewImageSrc || tileImageForView(tile, isMobile);
     return (
-      <div className={cls} onClick={onClick} style={Object.assign({ position: 'relative' }, bgColor ? { background: bgColor } : {})}>
+      <div className={cls + ' tile-media'} onClick={onClick} style={mediaStyle}>
         {img
           ? <img src={img} className="tile-uploaded-img" alt="" />
           : tile.wireframeImage
@@ -337,13 +337,13 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
   }
 
   // image or shoppable_image
-  var imgSrc = previewImageSrc || (viewMode === 'mobile' ? tileImageForView(tile, true) : tile.uploadedImage);
+  var imgSrc = previewImageSrc || tileImageForView(tile, isMobile);
   // Effective list shown on shoppable images: stored hotspots, or one
   // default per linked product when none have been positioned yet.
   var shoppableHotspots = tile.type === 'shoppable_image' ? effectiveShoppableHotspots(tile) : [];
   var dragOverride = dragRef.current;
   return (
-    <div ref={tileRootRef} className={cls} onClick={onClick} style={Object.assign({ position: 'relative' }, bgColor ? { background: bgColor } : {})}>
+    <div ref={tileRootRef} className={cls + ' tile-media'} onClick={onClick} style={mediaStyle}>
       {imgSrc
         ? <img src={imgSrc} className="tile-uploaded-img" alt="" draggable={false} />
         : tile.wireframeImage

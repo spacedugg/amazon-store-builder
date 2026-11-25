@@ -24,14 +24,17 @@ for (const width of [1440, 390, 320]) {
     await app.getByLabel('Google-Drive-Kundenordner (Pflichtfeld)').fill(TEST_DRIVE_FOLDER);
     await app.getByRole('button', { name: 'Importieren', exact: true }).click();
     const toolbar = app.locator('.store-editor-topbar');
-    await expect(toolbar.getByRole('button')).toHaveText(['← Zurück', 'Beispiele', 'Speichern', 'Feedback', 'Mehr ▾']);
+    const toolbarButtons = ['Zurück', 'Beispiele', 'Desktop-Ansicht', 'Mobilansicht', 'Rückgängig', 'Wiederholen',
+      'Kundenlink', 'Designer-Link', 'Speichern', 'Feedback', 'Mehr'];
+    await expect(toolbar.getByRole('button')).toHaveCount(toolbarButtons.length);
+    for (const name of toolbarButtons) await expect(toolbar.getByRole('button', { name, exact: true })).toBeVisible();
     const boxes = await toolbar.getByRole('button').all().then(buttons => Promise.all(buttons.map(button => button.boundingBox())));
     const center = box => box.y + box.height / 2;
     expect(boxes.every(box => box.x >= 0 && box.x + box.width <= width + 1 && Math.abs(center(box) - center(boxes[0])) < 2)).toBe(true);
     await toolbar.getByRole('button', { name: 'Mehr', exact: true }).click();
     await expect(toolbar.getByRole('menuitem')).toHaveText([
-      'Kundenlink', 'Designer-Link', 'Bilder hochladen', 'Bilder nach Drive', 'Mit Claude bearbeiten',
-      'Produktdaten laden', 'Mobilansicht anzeigen', 'Rückgängig', 'Wiederholen', 'Store-Name ändern', 'Alle Bilder entfernen',
+      'Bilder hochladen', 'Bilder nach Drive', 'Mit Claude bearbeiten',
+      'Produktdaten laden', 'Store-Name ändern', 'Alle Bilder entfernen',
     ]);
     await app.keyboard.press('Escape');
     await expect(toolbar.getByRole('menu')).toHaveCount(0);

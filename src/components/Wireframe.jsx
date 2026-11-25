@@ -1,3 +1,5 @@
+import { tileDimensionsForView } from '../tileSync';
+
 var CATEGORY_BADGE_COLORS = {
   store_hero: '#8B5CF6',
   benefit: '#10B981',
@@ -79,7 +81,7 @@ function stripBoldMarkers(text) {
 }
 
 export default function Wireframe({ tile, width, viewMode, bgColor }) {
-  var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
+  var dims = tileDimensionsForView(tile, viewMode === 'mobile');
   var w = width || 280;
   var ht = Math.max(30, Math.round(w / (dims.w / dims.h)));
   var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : {};
@@ -171,7 +173,7 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
   var anchorX = tile.textAlign === 'right' ? rightX : tile.textAlign === 'center' ? centerX : leftX;
 
   return (
-    <svg viewBox={'0 0 ' + w + ' ' + ht} style={{ width: '100%', display: 'block' }}>
+    <svg className="tile-wireframe" viewBox={'0 0 ' + w + ' ' + ht} style={{ width: '100%', display: 'block' }}>
       <rect width={w} height={ht} fill={bgFill} rx="2" />
 
       {/* Heading, mehrzeilig */}
