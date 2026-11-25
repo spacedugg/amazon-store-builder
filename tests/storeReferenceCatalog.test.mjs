@@ -15,6 +15,18 @@ test('all new user links are represented and HSHOP tracking variants collapse to
   assert.equal(catalog.find(r => r.storeUrl === first).nameVerified, false);
 });
 
+test('NIVEA homepage capture is first while HSHOP and all other examples retain their order', () => {
+  const existing = mergeReferenceCatalog(catalog);
+  const storeUrl = 'https://www.amazon.de/stores/NIVEA/page/A4E07EE9-6895-493E-8F07-97526B71304D';
+  const saved = { brandName: 'NIVEA', storeUrl: storeUrl + '?ref=source', captureStatus: 'ready' };
+  const rows = mergeReferenceCatalog(catalog, [saved, { ...saved, storeUrl: storeUrl + '?ref=duplicate' }]);
+  assert.equal(rows[0].brandName, 'NIVEA');
+  assert.equal(rows[1].brandName, 'HSHOP-SPORT');
+  assert.equal(rows.length, existing.length + 1);
+  assert.deepEqual(rows.slice(1).map(row => row.id), existing.map(row => row.id));
+  assert.deepEqual(mergeReferenceCatalog(rows, [saved]).map(row => row.id), rows.map(row => row.id));
+});
+
 test('existing internal example links stay accessible, including alternative saved URLs', async () => {
   const admin = await readFile(new URL('../src/components/AdminAnalyze.jsx', import.meta.url), 'utf8');
   const urls = [...admin.matchAll(/url: '(https:[^']+)'/g)].map(m => referenceKey(m[1]));
@@ -51,3 +63,4 @@ test('removed references stay removed from API additions and HSHOP-SPORT is firs
  assert(!catalog.some(row=>["A096FF51-79D5-440D-8789-6255E9DFE87D", "30552E59-AC22-47B1-BBBB-AEA9225BD614", "3EB222DB-B679-4317-BFB8-B3F87C7A3E9A"].some(id=>row.storeUrl.includes(id))));
  assert(!rows.some(row=>/Gritin/.test(row.brandName)||row.storeUrl.includes('B0CLDWHKCB')));
 });
+
