@@ -17,7 +17,11 @@ export function mergeReferenceCatalog(catalog, additions = []) {
     if (rows.has(key) && row.captureStatus) { const current=rows.get(key); rows.set(key, { ...current, brandName: row.brandName || current.brandName, alternativeUrls: [...new Set([...(current.alternativeUrls || []),...(row.alternativeUrls || [])])], homepageScreenshot: row.homepageScreenshot || current.homepageScreenshot, captureStatus: row.captureStatus, captureError: row.captureError }); }
     if (!rows.has(key)) rows.set(key, { ...row, id: key, kind: key.startsWith('product:') ? 'product' : 'store', images: row.images || [], modules: row.modules || [] });
   }
-  return [...rows.values()].sort((a,b)=>Number(b.id==='amazon.de:8B640FD7-98E9-4C48-9BF0-422ED3F14A3A')-Number(a.id==='amazon.de:8B640FD7-98E9-4C48-9BF0-422ED3F14A3A'));
+  const pinned = new Map([
+    ['amazon.de:A4E07EE9-6895-493E-8F07-97526B71304D', 0],
+    ['amazon.de:8B640FD7-98E9-4C48-9BF0-422ED3F14A3A', 1],
+  ]);
+  return [...rows.values()].sort((a, b) => (pinned.get(a.id) ?? 2) - (pinned.get(b.id) ?? 2));
 }
 
 export function appendReferenceChoices(current, choices) {
@@ -50,3 +54,4 @@ export function homepageScreenshot(entry) {
 export function verifiedHomepageScreenshot(image) {
   return image?.captureEngine==='original-html-scroll-v1' && image.fullPage===true && (image.height<=7000 || image.quality?.tiled===true) && image.quality?.version>=2 && image.quality?.imagesComplete===true && image.quality?.imageCount>0 && image.quality?.scrollPasses>=2 && Math.abs(image.height-image.quality.documentHeight)<=2;
 }
+
